@@ -26,7 +26,7 @@ This roadmap breaks the project into phases and workstreams, assigns each workst
 | 0.1A — Domain & hosting setup | Create Vercel account/project (human login required), connect to GitHub, point Porkbun nameservers at Vercel per `docs/INFRASTRUCTURE.md` §3 | **Human + orchestrator** (needs founder's Vercel/Porkbun login; agent can prepare exact steps/records) | Nothing blocks on this immediately, but production deploy needs it eventually |
 | 0.1B — Repo scaffold | `git init`, Next.js + TypeScript + Tailwind scaffold, ESLint/Prettier config, `.gitignore`, base folder structure | `general-purpose` agent (or done directly by orchestrator) | Blocks 0.2 and all of Phase 1 |
 | 0.1C — Content extraction | Convert `PURPOSE.md`, `TENANTS.md`, `PRACTICES.md`, `COVENANT.md`, `GOVERNANCE.md` into structured MDX/JSON content files under `content/`, preserving meaning per REQ-CONTENT-001 | `general-purpose` agent, given only the specific source doc + `docs/CONTENT_STRATEGY.md` tone rules | Blocks all doctrine pages in Phase 1 |
-| 0.1D — Legal/status confirmation | Confirm current EIN/501(c)(3) status, decide `.com`/`.life` redirect behavior, decide Discord vs. self-host for v1 | **Human only** (founder decision) | Blocks REQ-LEGAL-001 footer copy and 0.2 community-CTA copy |
+| 0.1D — Legal/status confirmation | Confirm current EIN/501(c)(3) status, decide `.com`/`.life` redirect behavior | **Human only** (founder decision). Discord confirmed 2026-08-13 as v1 community platform — this item now only covers legal status + redirect behavior. | Blocks REQ-LEGAL-001 footer copy |
 
 ### Batch 0.2 — depends on Batch 0.1
 

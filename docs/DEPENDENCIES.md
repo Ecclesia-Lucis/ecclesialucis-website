@@ -24,7 +24,7 @@ This is the single source of truth for "can an agent just do this, or does it ne
 
 | # | Decision | Agent's recommendation | Your call |
 |---|---|---|---|
-| 1 | Discord vs. self-hosted community platform for v1 | Discord for v1 (free, fast, proven at your scale); revisit self-hosting once the community outgrows ~150-200 active members or ephemeral chat starts to feel like a real loss, given your "own the platform" instinct | **Open** |
+| 1 | Discord vs. self-hosted community platform for v1 | Discord for v1 (free, fast, proven at your scale); revisit self-hosting once the community outgrows ~150-200 active members or ephemeral chat starts to feel like a real loss, given your "own the platform" instinct | ✅ **Confirmed 2026-08-13: Discord for v1** |
 | 2 | `.com` / `.life` behavior | Redirect both to `.org` | Reasonable default, confirm |
 | 3 | Brand assets — are `assets/brand/*.png` (copied from the repo root) final logos, or AI-generated placeholders that need real design work? | Treat as placeholders unless you say otherwise — they read as AI-generated drafts | **Open** |
 | 4 | Visual/brand direction (palette, typography, tone) | Proposal in `docs/CONTENT_STRATEGY.md` — needs your sign-off before full build | **Open** |
@@ -49,10 +49,12 @@ This is the single source of truth for "can an agent just do this, or does it ne
 
 ## Open items summary (copy-paste checklist for you)
 
-- [ ] Decide: Discord vs. self-host for v1 community
+- [x] Decide: Discord vs. self-host for v1 community — **Discord confirmed 2026-08-13**
+- [x] GitHub repo created and pushed — **done 2026-08-13**
 - [ ] Confirm current EIN/501(c)(3) status (affects footer + any future donation copy)
 - [ ] Create Vercel account (or confirm you already have one from another project)
-- [ ] Say "go" when ready to: create the GitHub repo, create the Vercel project, and push
+- [ ] Create the Vercel project and connect it to `Ecclesia-Lucis/ecclesialucis-website`
 - [ ] Set up Porkbun DNS once a Vercel project exists (`docs/INFRASTRUCTURE.md` §2)
 - [ ] Confirm brand assets are placeholders vs. final
 - [ ] Review and approve `docs/CONTENT_STRATEGY.md` brand direction before full build begins
+- [ ] Create the Discord server for the community (`docs/ROADMAP.md` Workstream 0.2G)
