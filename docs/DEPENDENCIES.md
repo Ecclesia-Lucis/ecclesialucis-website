@@ -13,9 +13,9 @@ This is the single source of truth for "can an agent just do this, or does it ne
 
 | # | What | Why it's human-only | Status |
 |---|---|---|---|
-| 1 | **Vercel account** — sign up/log in (you mentioned a Google profile set up for this exact purpose — Vercel supports Google login) | Needs your credentials; ties billing to you | Not yet created (as far as this session knows) |
-| 2 | **Porkbun login** — to change nameservers for `ecclesialucis.org`/`.com`/`.life` | Registrar account, your credentials | You already have this (domains registered) |
-| 3 | **Discord account + server creation** (if Discord is confirmed as v1 community platform) | Needs a personal/organizational Discord account, which you noted you'd have to set up | Not yet created |
+| 1 | **Vercel account + project** — sign up/log in, import `Ecclesia-Lucis/ecclesialucis-website` from GitHub | Needs your credentials; ties billing to you | ✅ **Done 2026-08-13** — Vercel account and project created. Git-integrated deploys should now trigger automatically on push to `main` once the repo has app code. No Vercel API token has been provided or is needed for Phase 0/1 build work (see `docs/INFRASTRUCTURE.md`). |
+| 2 | **Porkbun login** — to change nameservers for `ecclesialucis.org`/`.com`/`.life` | Registrar account, your credentials | You already have this (domains registered). Still pending — do this once the site is far enough along to be worth pointing the live domain at (see `docs/INFRASTRUCTURE.md` §2). Not required for Phase 0/1 build work. |
+| 3 | **Discord account + server creation** | Needs a personal/organizational Discord account, which you noted you'd have to set up | ✅ **Done 2026-08-13** — server created, permanent invite: **https://discord.gg/GCAaeCcpD**. Use this URL for the `/community` page CTA and footer (Workstream 1.1F in `docs/ROADMAP.md`). |
 | 4 | **GitHub org access confirmation** — this session is authenticated as the `Ecclesia-Lucis` GitHub org already (via `gh`), so repo creation is technically possible without new login, but see ⏳ item below | N/A — already available | Available |
 | 5 | **Email for `hello@ecclesialucis.org`** — set up Porkbun forwarding or Google Workspace | Registrar/Google account access | Not yet set up |
 | 6 | **Legal/EIN/501(c)(3) status confirmation** | Only you know the actual current status of the EIN application (`How_to_Apply_for_EIN_Ecclesia_Lucis.docx` exists but its outcome isn't in this repo) — this gates any "tax-deductible donation" language and the footer's legal-status statement | **Blocking REQ-LEGAL-001** in `docs/PRD.md` |
@@ -26,8 +26,8 @@ This is the single source of truth for "can an agent just do this, or does it ne
 |---|---|---|---|
 | 1 | Discord vs. self-hosted community platform for v1 | Discord for v1 (free, fast, proven at your scale); revisit self-hosting once the community outgrows ~150-200 active members or ephemeral chat starts to feel like a real loss, given your "own the platform" instinct | ✅ **Confirmed 2026-08-13: Discord for v1** |
 | 2 | `.com` / `.life` behavior | Redirect both to `.org` | Reasonable default, confirm |
-| 3 | Brand assets — are `assets/brand/*.png` (copied from the repo root) final logos, or AI-generated placeholders that need real design work? | Treat as placeholders unless you say otherwise — they read as AI-generated drafts | **Open** |
-| 4 | Visual/brand direction (palette, typography, tone) | Proposal in `docs/CONTENT_STRATEGY.md` — needs your sign-off before full build | **Open** |
+| 3 | Brand assets — are `assets/brand/*.png` (copied from the repo root) final logos, or AI-generated placeholders that need real design work? | Treat as placeholders unless you say otherwise — they read as AI-generated drafts | Still **open** — treat as placeholder/moodboard input only, don't treat as final production logos |
+| 4 | Visual/brand direction (palette, typography, tone) | Proposal in `docs/CONTENT_STRATEGY.md` | ✅ **Approved 2026-08-13** — founder: "sounds ok... go with your suggestion from a design aesthetic." Proceed on agent intuition/judgment within that proposal. Founder wants to be able to request changes after seeing it — treat v1 visual execution as a strong first draft, not an unquestionable final, and keep it easy to iterate on (clean design-token file, not one-off hardcoded styles). **Photography is explicitly deferred to v2** — v1 imagery stays in the cosmic/gradient/light-motif treatment described in `docs/CONTENT_STRATEGY.md`, no stock or real photography yet. |
 | 5 | Analytics tool | Vercel Analytics (free, cookieless, zero setup) | Reasonable default, confirm |
 
 ## Actions needing your explicit go-ahead before an agent does them (⏳)
@@ -51,10 +51,10 @@ This is the single source of truth for "can an agent just do this, or does it ne
 
 - [x] Decide: Discord vs. self-host for v1 community — **Discord confirmed 2026-08-13**
 - [x] GitHub repo created and pushed — **done 2026-08-13**
-- [ ] Confirm current EIN/501(c)(3) status (affects footer + any future donation copy)
-- [ ] Create Vercel account (or confirm you already have one from another project)
-- [ ] Create the Vercel project and connect it to `Ecclesia-Lucis/ecclesialucis-website`
-- [ ] Set up Porkbun DNS once a Vercel project exists (`docs/INFRASTRUCTURE.md` §2)
-- [ ] Confirm brand assets are placeholders vs. final
-- [ ] Review and approve `docs/CONTENT_STRATEGY.md` brand direction before full build begins
-- [ ] Create the Discord server for the community (`docs/ROADMAP.md` Workstream 0.2G)
+- [x] Create Vercel account + project, connect to `Ecclesia-Lucis/ecclesialucis-website` — **done 2026-08-13**
+- [x] Create the Discord server for the community — **done 2026-08-13**, invite: https://discord.gg/GCAaeCcpD
+- [x] Review and approve `docs/CONTENT_STRATEGY.md` brand direction before full build begins — **approved 2026-08-13**, agent has latitude, expect a revision pass after founder reviews the result
+- [ ] Confirm current EIN/501(c)(3) status (affects footer + any future donation copy) — still blocking REQ-LEGAL-001
+- [ ] Set up Porkbun DNS once the site is ready to go live (`docs/INFRASTRUCTURE.md` §2)
+- [ ] Confirm brand assets (`assets/brand/*.png`) are placeholders vs. final
+- [ ] Bring real photography into the site — **explicitly deferred to v2**, not blocking v1

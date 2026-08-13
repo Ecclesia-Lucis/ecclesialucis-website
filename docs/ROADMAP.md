@@ -23,7 +23,7 @@ This roadmap breaks the project into phases and workstreams, assigns each workst
 
 | Workstream | What | Agent | Blocks |
 |---|---|---|---|
-| 0.1A — Domain & hosting setup | Create Vercel account/project (human login required), connect to GitHub, point Porkbun nameservers at Vercel per `docs/INFRASTRUCTURE.md` §3 | **Human + orchestrator** (needs founder's Vercel/Porkbun login; agent can prepare exact steps/records) | Nothing blocks on this immediately, but production deploy needs it eventually |
+| 0.1A — Domain & hosting setup | Create Vercel account/project (human login required), connect to GitHub | **Human** | ✅ Done 2026-08-13 — Vercel account + project created and connected to `Ecclesia-Lucis/ecclesialucis-website`. Porkbun DNS cutover (`docs/INFRASTRUCTURE.md` §2) still pending, not required until the site is ready to go live. |
 | 0.1B — Repo scaffold | `git init`, Next.js + TypeScript + Tailwind scaffold, ESLint/Prettier config, `.gitignore`, base folder structure | `general-purpose` agent (or done directly by orchestrator) | Blocks 0.2 and all of Phase 1 |
 | 0.1C — Content extraction | Convert `PURPOSE.md`, `TENANTS.md`, `PRACTICES.md`, `COVENANT.md`, `GOVERNANCE.md` into structured MDX/JSON content files under `content/`, preserving meaning per REQ-CONTENT-001 | `general-purpose` agent, given only the specific source doc + `docs/CONTENT_STRATEGY.md` tone rules | Blocks all doctrine pages in Phase 1 |
 | 0.1D — Legal/status confirmation | Confirm current EIN/501(c)(3) status, decide `.com`/`.life` redirect behavior | **Human only** (founder decision). Discord confirmed 2026-08-13 as v1 community platform — this item now only covers legal status + redirect behavior. | Blocks REQ-LEGAL-001 footer copy |
@@ -34,7 +34,7 @@ This roadmap breaks the project into phases and workstreams, assigns each workst
 |---|---|---|---|
 | 0.2E — Design system | Color tokens, typography scale, spacing, base components (Button, Nav, Card, Section) built in Tailwind, light/dark theme, accessible focus states | `vercel:shadcn` skill + `general-purpose` agent | 0.1B |
 | 0.2F — Sitemap & IA finalization | Confirm final page list/nav structure against `docs/PRD.md` REQ-NAV-001 and `docs/CONTENT_STRATEGY.md` | `general-purpose` agent, human sign-off | 0.1C |
-| 0.2G — Community platform setup | Create Discord server (or start self-host eval) per 0.1D's decision | **Human** (needs a Discord account per founder's note that they'd "have to set up an account") | 0.1D |
+| 0.2G — Community platform setup | Create Discord server | **Human** | ✅ Done 2026-08-13 — server live, permanent invite https://discord.gg/GCAaeCcpD (see `docs/CONTENT_STRATEGY.md`) |
 
 ---
 

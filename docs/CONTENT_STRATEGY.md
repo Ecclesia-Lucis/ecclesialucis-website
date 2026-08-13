@@ -35,7 +35,15 @@ The website must not "reinterpret" doctrine — it translates it into a scannabl
 - **Words to avoid:** leader, follow(ers), obey, must believe, sin, salvation, convert (as in convert-a-soul; "conversion" as a marketing metric is internal-only vocabulary, never visitor-facing), join now / limited time / act fast.
 - **Words in active use:** light-bearer, practice, explore, tend, reflect, repair, steward, provisional, forkable, commons.
 
-## Brand direction (proposal — needs founder sign-off before full build)
+## Community link (confirmed)
+
+Discord invite (permanent, non-expiring): **https://discord.gg/GCAaeCcpD** — use this as the CTA target on `/community`, and consider a secondary placement in the footer/nav per REQ-CTA-001 in `docs/PRD.md`.
+
+## Brand direction (✅ approved 2026-08-13 — proceed on agent judgment within this proposal)
+
+Founder's exact words: "I'd like for you to make a visually stunning website but I don't have direction at this time, your intuition might be spot on so I'd go with your suggestion from a design aesthetic, but I would like to be able to make changes as necessary." Treat what follows as a confident, opinionated first draft to build — not a locked spec, and not something to hedge on by playing it safe. Expect a revision pass once the founder sees it; build the design-token layer cleanly (not one-off hardcoded styles) so that pass is cheap.
+
+**Photography is explicitly out of scope for v1** (founder: "add photographs, perhaps that's v2") — use the cosmic/gradient/light-motif imagery approach below instead of stock or real photography anywhere in v1.
 
 **Concept:** "Light in the dark" — a deep, calm dark-mode-first palette (near-black, deep indigo) with warm luminous accents (gold/amber gradient light), evoking both "church" gravitas and "light/cosmos" imagery from `PURPOSE.md` ("atoms forged in stars"). Light mode as a secondary, equally-polished alternative, not an afterthought — some visitors will have system light mode and the site should feel complete either way.
 
