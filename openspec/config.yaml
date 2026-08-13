@@ -1,0 +1,51 @@
+schema: spec-driven
+
+# Project context (optional)
+# This is shown to AI when creating artifacts.
+context: |
+  Public marketing website for Ecclesia Lucis ("The Church of Light"),
+  an open-source, non-hierarchical spiritual protocol. See ../CLAUDE.md
+  for the full operating contract before writing any proposal or spec.
+
+  Tech stack (decided, see ../docs/INFRASTRUCTURE.md): Next.js (App
+  Router, TypeScript), Tailwind CSS, hosted on Vercel, domain
+  ecclesialucis.org via Porkbun DNS. No backend/database in v1.
+
+  Non-negotiable content rules (see ../CLAUDE.md for full list):
+  no authority/hierarchy language (no "leader," "follow," "obey"),
+  no coercion or urgency/scarcity framing in conversion copy, doctrine
+  (Purpose/Tenets/Practices/Covenant) must be readable before any
+  call-to-action, no medical/legal/financial claims.
+
+  This project already has a hand-written planning doc set predating
+  OpenSpec adoption: ../docs/PRD.md (requirements, REQ-IDs),
+  ../docs/ROADMAP.md (phased build plan, agent assignments),
+  ../docs/INFRASTRUCTURE.md, ../docs/DEPENDENCIES.md,
+  ../docs/CONTENT_STRATEGY.md, ../docs/SECURITY.md. Treat those as the
+  current source of truth until a change proposal formally migrates a
+  given piece of scope into openspec/specs/ — don't assume openspec/
+  is authoritative over docs/ until that migration happens per area.
+
+# Per-artifact rules (optional)
+# Add custom rules for specific artifacts.
+rules:
+  proposal:
+    - Cross-check any new proposal against ../CLAUDE.md content rules
+      before writing it — flag ambiguity for the founder rather than
+      guessing toward authoritative-sounding or high-pressure copy.
+  tasks:
+    - Note in each task whether it's human-only, agent-can-do, or
+      needs founder go-ahead first, consistent with
+      ../docs/DEPENDENCIES.md's existing categorization.
+
+# Per-operation guidance (optional)
+# Add advisory guidance for how apply and archive work should be conducted.
+# This is separate from artifact rules above.
+# Example:
+#   operations:
+#     apply:
+#       guidance:
+#         - Keep test summaries concise
+#     archive:
+#       guidance:
+#         - Summarize the archive outcome before finishing

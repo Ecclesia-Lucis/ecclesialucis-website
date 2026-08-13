@@ -48,6 +48,16 @@ See `docs/INFRASTRUCTURE.md` for the full reasoning. Summary:
 - **Verify UI changes in a browser** (per house rules) before declaring a frontend task done — screenshot or describe what you actually saw, not just that the build passed.
 - **Accessibility and performance are requirements, not stretch goals** — see `docs/PRD.md` §5 for targets (WCAG 2.2 AA, Core Web Vitals budgets).
 
+## Spec-driven development with OpenSpec
+
+This project uses [OpenSpec](https://github.com/Fission-AI/OpenSpec) (`openspec/` + `.claude/commands/opsx/*`, installed 2026-08-13) to formalize how new work gets planned and implemented, and doubles as the founder's practice ground for the workflow ahead of future app projects.
+
+**Workflow:** `/opsx:propose "<idea>"` generates a change folder (`openspec/changes/<name>/proposal.md`, `specs/<capability>/spec.md`, `design.md`, `tasks.md`) → review/edit those artifacts → `/opsx:apply` implements against `tasks.md` → `/opsx:archive` folds the change into `openspec/specs/` (the living baseline) once done. `/opsx:explore` is for open-ended discussion before committing to a proposal.
+
+**Relationship to the existing `docs/` set:** `docs/PRD.md` and `docs/ROADMAP.md` predate OpenSpec adoption and remain the source of truth for overall v1 scope and phasing. Don't treat `openspec/specs/` as authoritative over `docs/` for a given area until a change proposal has actually migrated that area's requirements in — otherwise the two will drift and disagree. Practical rule going forward: **use `/opsx:propose` for each new unit of work from Phase 0 onward** (e.g. "scaffold the Next.js app," "build the home page"), rather than retroactively converting the existing docs wholesale. Individual REQ-IDs from `docs/PRD.md` can be pulled into a proposal's spec as they become relevant to the change at hand.
+
+`openspec/config.yaml` carries a `context` block pointing back at this file and the content rules above — every proposal/spec generated through OpenSpec is meant to inherit those constraints automatically.
+
 ## Reference documents
 
 | Doc | Purpose |
