@@ -39,6 +39,7 @@ jobs:
 
       - name: Create build branch
         run: |
+          git push origin --delete "agentic/${{ inputs.change_name }}" || true
           git checkout -b "agentic/${{ inputs.change_name }}"
 
       # Runs the /opsx:apply slash command headlessly against the approved
