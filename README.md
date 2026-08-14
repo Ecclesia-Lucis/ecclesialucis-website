@@ -4,6 +4,8 @@ The public marketing website for **Ecclesia Lucis** ("The Church of Light") — 
 
 **Status:** 📋 Planning phase — see `docs/` for the full plan. No application code yet; this is the founding document set for the project.
 
+The unattended agentic-build pipeline is live — see `docs/AGENTIC_BUILD.md`.
+
 ## Start here
 
 - **`CLAUDE.md`** — project guidance and content rules for any coding agent (or human) working on this repo.
