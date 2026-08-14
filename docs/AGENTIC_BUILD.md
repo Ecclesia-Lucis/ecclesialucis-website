@@ -58,6 +58,15 @@ The workflow file is `.github/workflows/agentic-build.yml`.
 
 Run it once against a trivial, low-risk OpenSpec change first (e.g., a copy tweak) and confirm the PR and preview actually appear, before pointing it at anything substantial. This is the same "30-second smoke test" principle that would have saved a wasted day on the cloud-routines dead end — verify the pipe works before pouring something expensive through it.
 
+## First real build: v0.1 (2026-08-14)
+
+`workflow_dispatch` now accepts `max_turns`, `max_budget_usd`, and `timeout_minutes` inputs (defaults 60/$15/45min, sized for small changes). The v0.1 build (`v0-1-website-build`: full Next.js scaffold, design system, all 6 core pages) was run with `max_turns=250 max_budget_usd=60 timeout_minutes=120` — raise these per-run for anything bigger than a small change, e.g.:
+```
+gh workflow run agentic-build.yml -f change_name=<name> -f max_turns=250 -f max_budget_usd=60 -f timeout_minutes=120
+```
+
+The GitHub Actions build itself succeeded cleanly (39 files, real content, `npm run build`/`lint` passed). The Vercel deployment on the resulting PR then failed separately with `No Output Directory named "public" found` — the Vercel project's `framework` field was `null` (it was created 2026-08-13 before any app code existed to auto-detect from) and defaulted to expecting a static output dir. Fixed by adding `vercel.json` with `{"framework": "nextjs"}` directly to the PR branch — no dashboard visit needed, and this file should stay in the repo going forward so it can never regress. See `../../../agentic-project-framework/LESSONS_LEARNED.md` items 9–10 for the full writeup (including a false-alarm `gh run watch` network blip that looked like a failure but wasn't).
+
 ## Smoke test results (2026-08-14)
 
 Ran the full loop against a trivial change (`smoke-test-readme-note` — a one-sentence README addition). Confirmed end-to-end: `/opsx:propose` → review → commit → `workflow_dispatch` → headless `/opsx:apply` on a GitHub-hosted runner → verified → committed → [PR #1](https://github.com/Ecclesia-Lucis/ecclesialucis-website/pull/1) opened → Vercel preview built successfully. Full detail and the gotchas hit along the way (invalid-key, PR-permission block, non-idempotent branch) are in `LESSONS_LEARNED.md` at the framework level (`../../../agentic-project-framework/LESSONS_LEARNED.md`) — the fixes are already folded into steps 2–3 above and into `.github/workflows/agentic-build.yml`'s idempotent branch creation.
