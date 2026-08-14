@@ -11,6 +11,21 @@ on:
         description: "OpenSpec change to implement (folder name under openspec/changes/, e.g. add-donation-page)"
         required: true
         type: string
+      max_turns:
+        description: "Max agent turns (raise for larger changes)"
+        required: false
+        type: string
+        default: "60"
+      max_budget_usd:
+        description: "Hard USD cap for this run"
+        required: false
+        type: string
+        default: "15"
+      timeout_minutes:
+        description: "Job timeout in minutes"
+        required: false
+        type: string
+        default: "45"
 
 concurrency:
   group: agentic-build-${{ inputs.change_name }}
@@ -23,7 +38,7 @@ permissions:
 jobs:
   apply:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: ${{ fromJSON(inputs.timeout_minutes) }}
     steps:
       - uses: actions/checkout@v6
 
@@ -53,8 +68,8 @@ jobs:
           claude -p "/opsx:apply ${{ inputs.change_name }}" \
             --permission-mode acceptEdits \
             --allowedTools "Read,Write,Edit,Glob,Grep,Bash" \
-            --max-turns 60 \
-            --max-budget-usd 15
+            --max-turns ${{ inputs.max_turns }} \
+            --max-budget-usd ${{ inputs.max_budget_usd }}
 
       - name: Install dependencies and verify build
         run: |
