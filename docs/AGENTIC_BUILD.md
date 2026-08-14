@@ -27,7 +27,7 @@ Nothing here uses Anthropic's own cloud infrastructure. It's a standard CI pipel
 2. **Review** (interactive): read the generated artifacts, edit anything that needs it, per the existing OpenSpec workflow in `../CLAUDE.md`.
 3. **Commit the approved change folder** to `main` — this is just planning docs, not code, low risk.
 4. **Trigger the build** — from GitHub's web UI, GitHub mobile, or `gh workflow run agentic-build.yml -f change_name=<name>`. Laptop can be closed the instant this fires.
-5. **Unattended**, on GitHub's infrastructure: the runner installs the Claude Code CLI, runs `/opsx:apply <name>` headlessly (`--permission-mode acceptEdits`, capped `--max-turns 60 --max-budget-usd 15`), verifies the build (`npm run build`/`npm run lint` once the app is scaffolded), then commits to a branch and opens a PR using the workflow's own `GITHUB_TOKEN`.
+5. **Unattended**, on GitHub's infrastructure: the runner installs the Claude Code CLI and the OpenSpec CLI, runs `/opsx:apply <name>` headlessly (`--permission-mode acceptEdits`, capped `--max-turns 60 --max-budget-usd 15`), verifies the build (`npm run build`/`npm run lint` once the app is scaffolded), then commits to a branch and opens a PR using the workflow's own `GITHUB_TOKEN`.
 6. **Vercel** picks up the PR branch push automatically and builds a preview URL — check it from any browser, including a phone, no laptop needed.
 7. **Merge** the PR (web or mobile) when satisfied → Vercel promotes to production.
 
@@ -36,8 +36,17 @@ The workflow file is `.github/workflows/agentic-build.yml`.
 ## One-time setup (human-only)
 
 1. Create an API key in the [Claude Console](https://console.anthropic.com) (separate from any claude.ai subscription login).
-2. Add it as a repository secret: repo Settings → Secrets and variables → Actions → New repository secret → name `ANTHROPIC_API_KEY`.
-3. Nothing else — GitHub Actions is already enabled by default on a new repo, and Vercel's git integration is already connected (`docs/DEPENDENCIES.md` item 1).
+2. Add it as a repository secret. The GitHub web UI path (Settings → Secrets and variables → Actions → New repository secret) may not be where you expect depending on your view/permissions — the reliable path, confirmed working here, is the CLI, run in your own terminal so the key never touches a chat transcript:
+   ```
+   gh secret set ANTHROPIC_API_KEY --repo Ecclesia-Lucis/ecclesialucis-website
+   ```
+   Paste the key **directly from the Console into the terminal**. Do not stage it through a notes app first — see `LESSONS_LEARNED.md` item 3, a real failure caused by exactly that.
+3. Enable **"Allow GitHub Actions to create and approve pull requests"** — off by default on a new repo, and the workflow's PR-creation step will fail without it. Set via API rather than hunting the UI:
+   ```
+   gh api -X PUT repos/Ecclesia-Lucis/ecclesialucis-website/actions/permissions/workflow \
+     -f default_workflow_permissions=read -F can_approve_pull_request_reviews=true
+   ```
+4. Nothing else — GitHub Actions is already enabled by default on a new repo, and Vercel's git integration is already connected (`docs/DEPENDENCIES.md` item 1).
 
 ## Cost model
 
@@ -48,6 +57,10 @@ The workflow file is `.github/workflows/agentic-build.yml`.
 ## Before trusting it with something you care about
 
 Run it once against a trivial, low-risk OpenSpec change first (e.g., a copy tweak) and confirm the PR and preview actually appear, before pointing it at anything substantial. This is the same "30-second smoke test" principle that would have saved a wasted day on the cloud-routines dead end — verify the pipe works before pouring something expensive through it.
+
+## Smoke test results (2026-08-14)
+
+Ran the full loop against a trivial change (`smoke-test-readme-note` — a one-sentence README addition). Confirmed end-to-end: `/opsx:propose` → review → commit → `workflow_dispatch` → headless `/opsx:apply` on a GitHub-hosted runner → verified → committed → [PR #1](https://github.com/Ecclesia-Lucis/ecclesialucis-website/pull/1) opened → Vercel preview built successfully. Full detail and the gotchas hit along the way (invalid-key, PR-permission block, non-idempotent branch) are in `LESSONS_LEARNED.md` at the framework level (`../../../agentic-project-framework/LESSONS_LEARNED.md`) — the fixes are already folded into steps 2–3 above and into `.github/workflows/agentic-build.yml`'s idempotent branch creation.
 
 ## Reusing this for other projects
 
