@@ -1,0 +1,82 @@
+name: Agentic Build
+
+# Manual-only trigger by design: this is the deliberate "go" moment for an
+# unattended build. Fire it from the GitHub web UI, the GitHub mobile app, or
+# `gh workflow run agentic-build.yml -f change_name=<name>` from any machine —
+# none of that requires the founder's own laptop to be open or on.
+on:
+  workflow_dispatch:
+    inputs:
+      change_name:
+        description: "OpenSpec change to implement (folder name under openspec/changes/, e.g. add-donation-page)"
+        required: true
+        type: string
+
+concurrency:
+  group: agentic-build-${{ inputs.change_name }}
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Claude Code CLI
+        run: npm install -g @anthropic-ai/claude-code
+
+      - name: Create build branch
+        run: |
+          git checkout -b "agentic/${{ inputs.change_name }}"
+
+      # Runs the /opsx:apply slash command headlessly against the approved
+      # OpenSpec change. Auth is a plain metered API key (see
+      # docs/AGENTIC_BUILD.md for why this is an API key and not a
+      # subscription OAuth token) — never a Claude-hosted cloud routine.
+      - name: Implement OpenSpec change
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          claude -p "/opsx:apply ${{ inputs.change_name }}" \
+            --permission-mode acceptEdits \
+            --allowedTools "Read,Write,Edit,Glob,Grep,Bash" \
+            --max-turns 60 \
+            --max-budget-usd 15
+
+      - name: Install dependencies and verify build
+        run: |
+          if [ -f package.json ]; then
+            npm ci
+            npm run build --if-present
+            npm run lint --if-present
+          else
+            echo "No package.json yet in this repo — skipping build verification for this run."
+          fi
+
+      - name: Commit and open PR
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "agentic-build[bot]"
+          git config user.email "agentic-build@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Claude made no changes — nothing to commit. Failing so this is visible, not silent."
+            exit 1
+          fi
+          git commit -m "Apply OpenSpec change: ${{ inputs.change_name }}"
+          git push origin "agentic/${{ inputs.change_name }}"
+          gh pr create \
+            --title "Apply: ${{ inputs.change_name }}" \
+            --base main \
+            --head "agentic/${{ inputs.change_name }}" \
+            --body "Autonomous build for OpenSpec change \`${{ inputs.change_name }}\`, run via workflow_dispatch. Check the Vercel preview deployment on this PR before merging. See openspec/changes/${{ inputs.change_name }}/ for the approved proposal/spec/design/tasks this was built against."

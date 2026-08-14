@@ -68,6 +68,7 @@ This project uses [OpenSpec](https://github.com/Fission-AI/OpenSpec) (`openspec/
 | `docs/DEPENDENCIES.md` | What only the founder (human) can do vs. what an agent can do, and what needs approval first |
 | `docs/CONTENT_STRATEGY.md` | Sitemap, doctrine-to-copy mapping, tone/voice rules, brand direction |
 | `docs/SECURITY.md` | Security requirements and checklist |
+| `docs/AGENTIC_BUILD.md` | Unattended propose→implement→deploy pipeline (GitHub Actions + API key), independent of any device staying on |
 
 ## Open decisions still owned by the founder
 

@@ -19,6 +19,7 @@ This is the single source of truth for "can an agent just do this, or does it ne
 | 4 | **GitHub org access confirmation** — this session is authenticated as the `Ecclesia-Lucis` GitHub org already (via `gh`), so repo creation is technically possible without new login, but see ⏳ item below | N/A — already available | Available |
 | 5 | **Email for `hello@ecclesialucis.org`** — set up Porkbun forwarding or Google Workspace | Registrar/Google account access | Not yet set up |
 | 6 | **Legal/EIN/501(c)(3) status confirmation** | Only you know the actual current status of the EIN application (`How_to_Apply_for_EIN_Ecclesia_Lucis.docx` exists but its outcome isn't in this repo) — this gates any "tax-deductible donation" language and the footer's legal-status statement | **Blocking REQ-LEGAL-001** in `docs/PRD.md` |
+| 7 | **Anthropic Console API key** — for the unattended build pipeline in `docs/AGENTIC_BUILD.md`, stored as the `ANTHROPIC_API_KEY` repo secret | Needs your Console login and billing | Not yet set up — required before `.github/workflows/agentic-build.yml` can run |
 
 ## Decisions (human judgment, agent can prep options but shouldn't pick for you)
 
@@ -55,6 +56,7 @@ This is the single source of truth for "can an agent just do this, or does it ne
 - [x] Create the Discord server for the community — **done 2026-08-13**, invite: https://discord.gg/GCAaeCcpD
 - [x] Review and approve `docs/CONTENT_STRATEGY.md` brand direction before full build begins — **approved 2026-08-13**, agent has latitude, expect a revision pass after founder reviews the result
 - [ ] Confirm current EIN/501(c)(3) status (affects footer + any future donation copy) — still blocking REQ-LEGAL-001
+- [ ] Create Anthropic Console API key and add as `ANTHROPIC_API_KEY` repo secret, so `.github/workflows/agentic-build.yml` can run (`docs/AGENTIC_BUILD.md`)
 - [ ] Set up Porkbun DNS once the site is ready to go live (`docs/INFRASTRUCTURE.md` §2)
 - [ ] Confirm brand assets (`assets/brand/*.png`) are placeholders vs. final
 - [ ] Bring real photography into the site — **explicitly deferred to v2**, not blocking v1
