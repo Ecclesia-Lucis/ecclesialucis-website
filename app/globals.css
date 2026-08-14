@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    color-scheme: dark light;
+  }
+
+  body {
+    @apply bg-base font-body text-ink antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display text-ink;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Visible, token-driven focus states for keyboard users (WCAG 2.2 AA). */
+  :focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background: var(--color-accent);
+    color: var(--color-accent-contrast);
+  }
+}
+
+@layer components {
+  /* Soft radial "light in the dark" glow used behind hero sections. */
+  .glow-field {
+    background:
+      radial-gradient(
+        60% 55% at 50% 0%,
+        color-mix(in oklab, var(--color-accent) 22%, transparent) 0%,
+        transparent 70%
+      ),
+      radial-gradient(
+        40% 40% at 85% 20%,
+        color-mix(in oklab, var(--color-accent-soft) 14%, transparent) 0%,
+        transparent 70%
+      );
+  }
+
+  .prose-doctrine {
+    @apply max-w-prose text-lg leading-relaxed text-ink-muted;
+  }
+
+  .prose-doctrine p + p {
+    @apply mt-5;
+  }
+}
