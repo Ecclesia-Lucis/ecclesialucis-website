@@ -2,6 +2,14 @@
 
 This file is project guidance for any Claude Code session working in this directory. Read it before making changes. It is the operating contract for this specific project: `ecclesialucis-website`, the public marketing site for **Ecclesia Lucis ("The Church of Light")**.
 
+## Current status (updated 2026-08-14 — check `docs/DEPENDENCIES.md` for anything newer)
+
+**v0.1 is built and live in production** at `ecclesialucis-website.vercel.app` — Next.js scaffold, design system, and all 6 core pages, built unattended via `/opsx:propose` → `/opsx:apply` → the GitHub Actions pipeline in `docs/AGENTIC_BUILD.md`, merged to `main` 2026-08-14. The implemented requirements now live as the OpenSpec baseline at `openspec/specs/` (`site-scaffold`, `design-system`, `doctrine-content`, `marketing-pages`) — start any new change with `/opsx:propose` against that baseline, not from scratch.
+
+**Not yet done:** custom domain cutover (Porkbun DNS still points elsewhere — not urgent, doesn't block further work), Phase 2 polish (accessibility audit, performance pass, security hardening, SEO, analytics — see `docs/ROADMAP.md`), and the founder's own review/revision pass on v0.1 (expected per `docs/CONTENT_STRATEGY.md` — if founder notes exist from that review, they should show up as new `/opsx:propose` changes rather than direct edits, to keep the planning trail intact).
+
+**How to pick up work here:** run `/opsx:propose "<description>"` for whatever's next (a Phase 2 item, a founder revision note, a new feature) → review the generated plan → commit it → trigger the build per `docs/AGENTIC_BUILD.md` (works from a phone, no laptop needed) → review the resulting PR's preview → merge.
+
 ## What this project is
 
 The public website at **ecclesialucis.org** — the front door for the Ecclesia Lucis Protocol. Version 1 is an informational, visually striking marketing site: who we are, what we believe, how to practice, and how to find the community. It is **not**:
@@ -72,9 +80,8 @@ This project uses [OpenSpec](https://github.com/Fission-AI/OpenSpec) (`openspec/
 
 ## Open decisions still owned by the founder
 
-These are recommendations, not final calls — see `docs/DEPENDENCIES.md` for the full list:
+These are recommendations, not final calls — see `docs/DEPENDENCIES.md` for the full list. (Discord-as-v1-platform and pre-build visual direction sign-off are resolved — see `docs/DEPENDENCIES.md` history — the open item now is reviewing the *built* result, not the proposal.)
 
 - Confirm `.org` as primary domain (assumed yes) and what `.com`/`.life` should do (assumed: redirect).
-- Confirm Discord as the v1 community platform, or self-host from day one.
-- Confirm current EIN / 501(c)(3) status before any "tax-deductible donation" language ships.
-- Sign off on visual direction before full build (see `docs/CONTENT_STRATEGY.md` Brand Direction section).
+- Confirm current EIN / 501(c)(3) status before any "tax-deductible donation" language ships — blocks the Phase 3 launch gate, see `docs/ROADMAP.md`.
+- Review v0.1 as built (`ecclesialucis-website.vercel.app`) and raise any revision notes as new `/opsx:propose` changes.

@@ -59,9 +59,12 @@ This is the single source of truth for "can an agent just do this, or does it ne
 - [x] Create Anthropic Console API key and add as `ANTHROPIC_API_KEY` repo secret — **done 2026-08-14**
 - [x] Enable GitHub Actions PR-creation permission — **done 2026-08-14**
 - [x] Smoke-test the agentic-build pipeline end to end — **done 2026-08-14**, see `docs/AGENTIC_BUILD.md` "Smoke test results"
-- [x] Build v0.1 (Phase 0 + Phase 1: scaffold, design system, all 6 core pages) — **done 2026-08-14**, unattended via the agentic-build pipeline, see [PR #2](https://github.com/Ecclesia-Lucis/ecclesialucis-website/pull/2). Awaiting founder review before merge.
-- [ ] Review PR #2 and merge when satisfied (promotes to production)
-- [ ] Confirm current EIN/501(c)(3) status (affects footer + any future donation copy) — still blocking REQ-LEGAL-001
+- [x] Build v0.1 (Phase 0 + Phase 1: scaffold, design system, all 6 core pages) — **done 2026-08-14**, unattended via the agentic-build pipeline, see [PR #2](https://github.com/Ecclesia-Lucis/ecclesialucis-website/pull/2) (merged, squash)
+- [x] Review PR #2, merge, confirm production deploy — **done 2026-08-14**, live at `ecclesialucis-website.vercel.app` (`readyState: READY`)
+- [x] Archive the `v0-1-website-build` OpenSpec change, sync specs to `openspec/specs/` — **done 2026-08-14**, see `openspec/changes/archive/2026-08-14-v0-1-website-build/`
+- [ ] **Founder review of v0.1** — visit the live preview, raise any revision notes as new `/opsx:propose` changes (expected per `docs/CONTENT_STRATEGY.md` Brand Direction — treat v0.1 as a strong first draft, not final)
+- [ ] Confirm current EIN/501(c)(3) status (affects footer + any future donation copy) — still blocking REQ-LEGAL-001 and the Phase 3 launch gate
 - [ ] Set up Porkbun DNS once the site is ready to go live (`docs/INFRASTRUCTURE.md` §2)
 - [ ] Confirm brand assets (`assets/brand/*.png`) are placeholders vs. final
 - [ ] Bring real photography into the site — **explicitly deferred to v2**, not blocking v1
+- [ ] Phase 2 (Polish & Launch Readiness): accessibility audit, performance pass, security hardening, SEO basics, analytics wiring — see `docs/ROADMAP.md`, not started

@@ -1,6 +1,6 @@
 # Product Requirements Document — Ecclesia Lucis Website (v1)
 
-**Status:** Draft for founder review
+**Status:** All High-priority (H) functional requirements implemented in v0.1 (2026-08-14, live at `ecclesialucis-website.vercel.app`) except REQ-LEGAL-001 (footer ships an explicit placeholder, still blocked on EIN/501(c)(3) confirmation). Pending founder review of the built result. §9 release criteria (Lighthouse budgets, `docs/SECURITY.md` checklist) not yet run — Phase 2, see `docs/ROADMAP.md`. This document remains the requirements source of truth; `openspec/specs/` now tracks the same requirements as implemented, cross-referenced by REQ-ID.
 **Owner:** Ash (founder, Ecclesia Lucis)
 **Prepared by:** Claude Code, 2026-08-13
 **Structured against:** `.claude/agents/requirements-reviewer.md` rubric (inherited from the org's existing standard, see `application/LightPath/.claude/agents/requirements-reviewer.md`)
