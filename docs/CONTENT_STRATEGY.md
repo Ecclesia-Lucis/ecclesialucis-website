@@ -33,7 +33,7 @@ The website must not "reinterpret" doctrine — it translates it into a scannabl
 - Confident, warm, unhurried. Not salesy, not hedgy.
 - Second person where natural ("you're free to practice, modify, or depart entirely") — mirrors the source docs' own voice.
 - **Words to avoid:** leader, follow(ers), obey, must believe, sin, salvation, convert (as in convert-a-soul; "conversion" as a marketing metric is internal-only vocabulary, never visitor-facing), join now / limited time / act fast.
-- **Words in active use:** light-bearer, practice, explore, tend, reflect, repair, steward, provisional, forkable, commons.
+- **Words in active use:** wavelet, practice, explore, tend, reflect, repair, steward, provisional, forkable, commons.
 
 ## Community link (confirmed)
 

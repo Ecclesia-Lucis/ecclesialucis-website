@@ -45,7 +45,7 @@ The website itself: two visitor personas —
 ### 1.4 Definitions and Acronyms
 
 - **Protocol** — the Ecclesia Lucis Protocol, the doctrine defined in the root repo (`PURPOSE.md`, `TENANTS.md`, `PRACTICES.md`, `COVENANT.md`).
-- **Light-bearer** — term of art for a practitioner/community member (from `Ordination_of_the_Lightbearer_Ecclesia_Lucis.docx`); never "follower."
+- **Wavelet** — term of art for a practitioner/community member, used in site copy (the ceremony doc `Ordination_of_the_Lightbearer_Ecclesia_Lucis.docx` predates this rename and still uses "light-bearer" — site copy uses "wavelet" instead, since "light-bearer" doubles as a synonym for Lucifer); never "follower."
 - **LCP / CLS / INP** — Core Web Vitals performance metrics (Largest Contentful Paint, Cumulative Layout Shift, Interaction to Next Paint).
 - **WCAG 2.2 AA** — Web accessibility conformance standard, target level for this project.
 
@@ -69,7 +69,7 @@ The website itself: two visitor personas —
 
 - Understand, within seconds of landing, that this is non-dogmatic, non-hierarchical, and evidence-respecting — not a "cult site."
 - Read the doctrine (purpose, tenets, practices) in plain language without a signup wall.
-- Find a clear, low-commitment next step to connect with other light-bearers.
+- Find a clear, low-commitment next step to connect with other wavelets.
 - Trust the organization enough to consider deeper engagement later (attending a meditation, donating, ordination).
 
 ### 2.3 Success Metrics (v1, first 90 days post-launch)

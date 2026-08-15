@@ -11,8 +11,7 @@ export const site = {
   identity:
     "Ecclesia Lucis is an open, non-hierarchical spiritual path for people seeking meaning, connection, and ethical grounding — without dogma, coercion, or hierarchy.",
   /** One-sentence "what this is not" disclaimer — the skeptic's first question, answered up front. */
-  whatThisIsNot:
-    "No hierarchy, no clergy, no required beliefs, no fees. A faith of equals, each an explorer on their own journey.",
+  whatThisIsNot: "No hierarchy, no clergy, no required beliefs, no fees.",
   domain: "ecclesialucis.org",
   repoUrl: "https://github.com/Ecclesia-Lucis/ecclesia-lucis-protocol",
   discordUrl: "https://discord.gg/GCAaeCcpD",

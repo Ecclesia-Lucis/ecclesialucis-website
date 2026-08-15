@@ -5,6 +5,10 @@ import { CtaBanner } from "@/components/CtaBanner";
 import { Container, Eyebrow, Section } from "@/components/Section";
 import { primaryCta, site } from "@/content/site";
 
+/** "Each an explorer on their own journey" — split out from the hero into its own section. */
+const explorerStatement =
+  "A faith where each is an explorer on their own journey.";
+
 const doctrineTeasers = [
   {
     href: "/purpose",
@@ -31,25 +35,35 @@ const doctrineTeasers = [
 export default function HomePage() {
   return (
     <>
-      {/* Hero — identity statement + "what this is not" above the fold (REQ-HOME-001). */}
+      {/* Hero — centered name → meaning → statement sequence, identity + "what
+          this is not" stay above the fold beneath it (REQ-HOME-001). */}
       <Section
         as="header"
-        className="glow-field relative flex min-h-[82vh] items-center overflow-hidden py-24 sm:min-h-[80vh]"
+        className="relative flex min-h-[88vh] items-center overflow-hidden py-24 sm:min-h-[84vh]"
         spacious={false}
       >
-        <Container className="motion-safe:animate-fade-up">
-          <Eyebrow>{site.tagline}</Eyebrow>
-          <h1 className="max-w-4xl text-balance text-4xl font-semibold leading-[1.05] tracking-tight sm:text-6xl">
-            A faith of equals, each an explorer on their own journey.
+        <div
+          aria-hidden
+          className="glow-field-hero motion-safe:animate-drift pointer-events-none absolute inset-0"
+        />
+        <Container className="motion-safe:animate-fade-up relative mx-auto flex flex-col items-center text-center">
+          <p className="text-sm font-semibold uppercase tracking-[0.35em] text-ink-subtle sm:text-[1rem]">
+            {site.name}
+          </p>
+          <p className="mt-3 text-balance font-display text-3xl font-semibold tracking-tight text-ink sm:text-5xl">
+            {site.tagline}
+          </p>
+          <h1 className="mt-6 text-balance font-display text-5xl font-semibold italic leading-[1.05] tracking-tight text-accent sm:text-7xl">
+            A faith of equals
           </h1>
-          <p className="mt-7 max-w-2xl text-lg leading-relaxed text-ink-muted sm:text-xl">
+          <p className="mt-8 max-w-2xl text-lg leading-relaxed text-ink-muted sm:text-xl">
             {site.identity}
           </p>
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-ink-subtle">
             <span className="font-semibold text-ink">What this is not: </span>
             {site.whatThisIsNot}
           </p>
-          <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
+          <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-center">
             <Button href="/purpose" size="lg">
               Read the doctrine
             </Button>
@@ -57,6 +71,16 @@ export default function HomePage() {
               {primaryCta.label}
             </Button>
           </div>
+        </Container>
+      </Section>
+
+      {/* Explorer statement — "each an explorer on their own journey," distinct
+          from the hero's focal statement, leading into the doctrine teasers. */}
+      <Section spacious={false} className="pb-0 pt-16 sm:pt-20">
+        <Container>
+          <p className="max-w-3xl text-balance font-display text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
+            {explorerStatement}
+          </p>
         </Container>
       </Section>
 

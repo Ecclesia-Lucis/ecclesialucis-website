@@ -6,7 +6,7 @@
 
 export const community = {
   eyebrow: "Community",
-  title: "A community of light-bearers",
+  title: "A community of wavelets",
   intro: [
     "Ecclesia Lucis gathers on Discord — an open space for reflection, conversation, and shared service among people exploring this path.",
     "There is no membership to apply for and nothing to prove. You are welcome to read quietly for as long as you like, or to take part whenever it feels right.",
