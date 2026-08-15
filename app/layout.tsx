@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Fraunces, Manrope } from "next/font/google";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
+import { WayfindingThread } from "@/components/WayfindingThread";
 import { site } from "@/content/site";
 import "./globals.css";
 
@@ -38,8 +39,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: dark)", color: "#0a0a12" },
-    { media: "(prefers-color-scheme: light)", color: "#faf8f3" },
+    { media: "(prefers-color-scheme: light)", color: "#f7f7fa" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0a0f" },
   ],
 };
 
@@ -54,7 +55,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Skip to content
         </a>
         <Nav />
-        <main id="main" className="flex-1">
+        <main id="main" className="relative flex-1">
+          {/* Shared decorative wayfinding-thread motif, threaded behind all
+              page content (design-system spec: shared element, not per-page). */}
+          <WayfindingThread />
           {children}
         </main>
         <Footer />

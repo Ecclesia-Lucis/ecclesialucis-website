@@ -6,7 +6,7 @@
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
-    color-scheme: dark light;
+    color-scheme: light dark;
   }
 
   body {
@@ -40,45 +40,76 @@
 }
 
 @layer components {
-  /* Soft radial "light in the dark" glow used behind hero sections. */
+  /*
+   * Spectrum-bleed edge glow (design-system spec: "Spectrum-bleed edge glow").
+   * A subtle rainbow-hued glow bleeding in from the outer edges/corners of the
+   * layer behind page content, replacing the v0.1 single-hue amber `glow-field`.
+   * Every radial is edge-anchored (positioned at a corner/edge, 0%/100%) and
+   * fades to transparent well before the centre, so the content measure
+   * (layout.contentMax) stays clear and foreground text contrast never drops
+   * below WCAG 2.2 AA. Kept low-opacity + soft-falloff (no filter: blur, so it
+   * is safe to apply directly to a content section without blurring its text).
+   * Applied to an aria-hidden layer/section so it is decorative only.
+   *
+   * `.glow-field` — the quieter interior-page variant (PageHeader).
+   */
   .glow-field {
     background:
       radial-gradient(
-        60% 55% at 50% 0%,
-        color-mix(in oklab, var(--color-accent) 22%, transparent) 0%,
-        transparent 70%
+        42% 46% at 0% 0%,
+        color-mix(in oklab, var(--color-spectrum-accent1) 16%, transparent) 0%,
+        transparent 62%
       ),
       radial-gradient(
-        40% 40% at 85% 20%,
-        color-mix(in oklab, var(--color-accent-soft) 14%, transparent) 0%,
-        transparent 70%
+        44% 48% at 100% 4%,
+        color-mix(in oklab, var(--color-spectrum-accent3) 14%, transparent) 0%,
+        transparent 64%
+      ),
+      radial-gradient(
+        50% 40% at 100% 60%,
+        color-mix(in oklab, var(--color-spectrum-accent5) 12%, transparent) 0%,
+        transparent 66%
       );
   }
 
   /*
-   * Hero light-source treatment (design.md decision): a brighter, centered
-   * layered glow standing in for a literal light-source image/animation,
-   * without a canvas/WebGL dependency. Meant to sit on its own absolutely
-   * positioned layer behind hero text, animated via the existing `drift`
-   * keyframe (motion-safe / prefers-reduced-motion-gated) rather than moving
-   * the text itself.
+   * `.glow-field-hero` — the fuller homepage-hero variant: the whole compressed
+   * ROYGBIV set bleeding in from every edge/corner. Meant to sit on its own
+   * absolutely positioned aria-hidden layer behind the hero text, animated via
+   * the existing `drift` keyframe (motion-safe / prefers-reduced-motion-gated)
+   * rather than moving the text itself.
    */
   .glow-field-hero {
     background:
       radial-gradient(
-        46% 42% at 50% 34%,
-        color-mix(in oklab, var(--color-accent) 38%, transparent) 0%,
-        transparent 72%
+        40% 46% at 0% 6%,
+        color-mix(in oklab, var(--color-spectrum-accent1) 22%, transparent) 0%,
+        transparent 60%
       ),
       radial-gradient(
-        70% 60% at 50% 30%,
-        color-mix(in oklab, var(--color-accent-soft) 20%, transparent) 0%,
-        transparent 75%
+        38% 42% at 20% 100%,
+        color-mix(in oklab, var(--color-spectrum-accent2) 18%, transparent) 0%,
+        transparent 60%
       ),
       radial-gradient(
-        90% 70% at 50% 15%,
-        color-mix(in oklab, var(--color-accent-soft) 10%, transparent) 0%,
-        transparent 80%
+        44% 48% at 100% 0%,
+        color-mix(in oklab, var(--color-spectrum-accent3) 20%, transparent) 0%,
+        transparent 62%
+      ),
+      radial-gradient(
+        40% 46% at 88% 100%,
+        color-mix(in oklab, var(--color-spectrum-accent4) 18%, transparent) 0%,
+        transparent 62%
+      ),
+      radial-gradient(
+        46% 40% at 100% 58%,
+        color-mix(in oklab, var(--color-spectrum-accent5) 18%, transparent) 0%,
+        transparent 64%
+      ),
+      radial-gradient(
+        44% 42% at 0% 62%,
+        color-mix(in oklab, var(--color-spectrum-accent6) 18%, transparent) 0%,
+        transparent 64%
       );
   }
 
@@ -88,5 +119,40 @@
 
   .prose-doctrine p + p {
     @apply mt-5;
+  }
+
+  /*
+   * Wayfinding-thread reveal (see components/WayfindingThread.tsx). The paths
+   * carry pathLength="1", so stroke-dashoffset runs 1 (hidden) → 0 (fully
+   * drawn). Static fallback below leaves them fully drawn; the scroll-driven
+   * animation is layered on only when both `prefers-reduced-motion:
+   * no-preference` and scroll-timeline support hold, so unsupported browsers and
+   * reduced-motion visitors get the instant static state (spec: thread reveal
+   * "disabled or reduced to an instant/near-instant, static state").
+   */
+  .wayfinding-thread__path {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 0;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: scroll()) {
+      .wayfinding-thread__path {
+        stroke-dashoffset: 1;
+        animation: wayfinding-draw linear both;
+        animation-timeline: scroll(root block);
+      }
+
+      /* Offset the second strand so the two interweave as they draw in. */
+      .wayfinding-thread__path--2 {
+        animation-range: 6% 96%;
+      }
+    }
+  }
+}
+
+@keyframes wayfinding-draw {
+  to {
+    stroke-dashoffset: 0;
   }
 }
