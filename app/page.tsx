@@ -47,16 +47,25 @@ export default function HomePage() {
           className="glow-field-hero motion-safe:animate-drift pointer-events-none absolute inset-0"
         />
         <Container className="motion-safe:animate-fade-up relative mx-auto flex flex-col items-center text-center">
+          {/* Name/title/statement block — visual size order (largest to
+              smallest) "Church of Light" > "A faith of equals" > "Ecclesia
+              Lucis", independent of DOM heading level: a single logical <h1>
+              for the church's name, <h2> for the statement, and the name label
+              + pronunciation guide as non-heading <p>s (design.md heading
+              semantics decision). */}
           <p className="text-sm font-semibold uppercase tracking-[0.35em] text-ink-subtle sm:text-[1rem]">
             {site.name}
           </p>
-          <p className="mt-3 text-balance font-display text-3xl font-semibold tracking-tight text-ink sm:text-5xl">
-            {site.tagline}
+          <p className="mt-2 text-sm italic text-ink-subtle">
+            Eck-Lee-See-Ah Lu-Chish
           </p>
-          <h1 className="mt-6 text-balance font-display text-5xl font-semibold italic leading-[1.05] tracking-tight text-accent sm:text-7xl">
+          <h2 className="mt-6 text-balance font-display text-2xl font-semibold italic tracking-tight text-accent sm:text-4xl">
             A faith of equals
+          </h2>
+          <h1 className="mt-3 text-balance font-display text-5xl font-semibold leading-[1.05] tracking-tight text-ink sm:text-7xl">
+            {site.tagline}
           </h1>
-          <p className="mt-8 max-w-2xl text-lg leading-relaxed text-ink-muted sm:text-xl">
+          <p className="mt-hero-beat max-w-2xl text-lg leading-relaxed text-ink-muted sm:text-xl">
             {site.identity}
           </p>
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-ink-subtle">

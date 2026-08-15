@@ -48,6 +48,7 @@ const config: Config = {
       spacing: {
         section: spacing.section,
         gutter: spacing.gutter,
+        "hero-beat": spacing.heroBeat,
       },
       maxWidth: {
         content: layout.contentMax,
@@ -72,12 +73,12 @@ const config: Config = {
   plugins: [
     plugin(({ addBase }) => {
       addBase({
-        // Dark is the authored default.
-        ":root": themeVars(darkTheme),
-        // Light theme when the visitor's system prefers light — equally polished,
+        // Light is the authored default (v0.2 theme-role swap).
+        ":root": themeVars(lightTheme),
+        // Dark theme when the visitor's system prefers dark — equally polished,
         // no persisted override needed for v1 (design.md theme decision).
-        "@media (prefers-color-scheme: light)": {
-          ":root": themeVars(lightTheme),
+        "@media (prefers-color-scheme: dark)": {
+          ":root": themeVars(darkTheme),
         },
         // Disable decorative motion for visitors who ask for it (design-system spec).
         "@media (prefers-reduced-motion: reduce)": {
