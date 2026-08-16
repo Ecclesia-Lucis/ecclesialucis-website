@@ -1,13 +1,17 @@
 /**
  * Design tokens — the single source of truth for color, typography, and spacing.
  *
- * The "light in the dark" concept from docs/CONTENT_STRATEGY.md: a deep, calm
- * dark-mode-first palette (near-black / deep indigo) with warm luminous
- * gold/amber accents, plus an equally-polished light theme.
+ * v0.3 "Explosion of Light" concept (docs/design/v0-3-radical-light-vision.md):
+ * a true bright-white/near-white base with near-black ink is the authored
+ * default, paired with a small spectrum of bright, saturated accent hues
+ * (spectrumAccent1..6, a compressed ROYGBIV). The prior dark, near-black/indigo
+ * palette with a single gold/amber accent remains available as an
+ * equally-polished secondary (dark-mode) theme — same token shape, reused from
+ * the superseded web-v0-2-redesign proposal, values re-tuned for the whiter base.
  *
  * These raw values are consumed by tailwind.config.ts, which:
- *   1. emits them as CSS custom properties for each theme (dark = authored
- *      default at :root, light via `@media (prefers-color-scheme: light)`), and
+ *   1. emits them as CSS custom properties for each theme (light = authored
+ *      default at :root, dark via `@media (prefers-color-scheme: dark)`), and
  *   2. exposes semantic color utilities (bg-base, text-ink, ...) that read
  *      those variables.
  *
@@ -24,17 +28,52 @@ export type ColorRole =
   | "ink" // primary text
   | "inkMuted" // secondary text
   | "inkSubtle" // captions, metadata
-  | "accent" // warm luminous gold/amber — primary brand light
+  | "accent" // primary brand accent — defaults to spectrumAccent5 (blue)
   | "accentSoft" // dimmer accent for large fills / borders
   | "accentContrast" // text/icon color that sits legibly on `accent`
-  | "focus"; // focus ring
+  | "focus" // focus ring
+  | "spectrumAccent1" // red
+  | "spectrumAccent2" // orange
+  | "spectrumAccent3" // gold/yellow
+  | "spectrumAccent4" // green
+  | "spectrumAccent5" // blue (== accent)
+  | "spectrumAccent6"; // violet
 
 export type ThemeColors = Record<ColorRole, string>;
 
 /**
- * Dark theme — the authored default. Near-black indigo base, warm gold accent.
- * Contrast ratios target WCAG 2.2 AA (docs/PRD.md §5.3): ink on base ~15:1,
- * accent on base ~9:1, accentContrast (near-black) on accent ~8:1.
+ * Light theme — the authored default. True bright-white/near-white base
+ * (#ffffff), near-black ink, spectrum accent hues.
+ * Contrast ratios target WCAG 2.2 AA (docs/PRD.md §5.3): ink on base ~18.6:1,
+ * each spectrumAccentN on base >=4.5:1 for text, accentContrast (white) on
+ * accent ~5.85:1.
+ */
+export const lightTheme: ThemeColors = {
+  base: "#ffffff",
+  surface: "#fbfbf9",
+  surfaceMuted: "#f4f3ef",
+  border: "#e3e1d8",
+  ink: "#141311",
+  inkMuted: "#4d4a45",
+  inkSubtle: "#726f68",
+  accent: "#2360c9",
+  accentSoft: "#5b8fe0",
+  accentContrast: "#ffffff",
+  focus: "#2360c9",
+  spectrumAccent1: "#c22a3e",
+  spectrumAccent2: "#b8560c",
+  spectrumAccent3: "#8a6a00",
+  spectrumAccent4: "#2f7a3a",
+  spectrumAccent5: "#2360c9",
+  spectrumAccent6: "#7a3fc9",
+};
+
+/**
+ * Dark theme — an equally-polished secondary alternative, not a stripped-down
+ * fallback. Near-black indigo base (carried from v0.1), spectrum accent hues
+ * re-tuned for legibility against it. Contrast ratios target WCAG 2.2 AA:
+ * ink on base ~16.5:1, each spectrumAccentN on base >=6:1, accentContrast
+ * (near-black) on accent ~9.55:1.
  */
 export const darkTheme: ThemeColors = {
   base: "#0a0a12",
@@ -44,29 +83,16 @@ export const darkTheme: ThemeColors = {
   ink: "#f4f1ea",
   inkMuted: "#c3c0d4",
   inkSubtle: "#8f8ca8",
-  accent: "#f2b64a",
-  accentSoft: "#c98a2e",
-  accentContrast: "#1a1204",
-  focus: "#f2b64a",
-};
-
-/**
- * Light theme — an equally-polished alternative, not a stripped-down fallback.
- * Warm off-white base, deep indigo ink, amber accent darkened for contrast on
- * light backgrounds.
- */
-export const lightTheme: ThemeColors = {
-  base: "#faf8f3",
-  surface: "#ffffff",
-  surfaceMuted: "#f1ede3",
-  border: "#e0d9ca",
-  ink: "#1a1726",
-  inkMuted: "#4a465c",
-  inkSubtle: "#6c6880",
-  accent: "#a86a12",
-  accentSoft: "#c98a2e",
-  accentContrast: "#fffaf0",
-  focus: "#a86a12",
+  accent: "#7db8ff",
+  accentSoft: "#5b8fe0",
+  accentContrast: "#0a0a12",
+  focus: "#7db8ff",
+  spectrumAccent1: "#ff6b7a",
+  spectrumAccent2: "#ff9d4d",
+  spectrumAccent3: "#f2c94c",
+  spectrumAccent4: "#6fd68a",
+  spectrumAccent5: "#7db8ff",
+  spectrumAccent6: "#c39bff",
 };
 
 /** CSS variable name for a given color role (kebab-cased). */
@@ -100,6 +126,8 @@ export const fontSizes = {
 /** Spacing additions layered on top of Tailwind's default scale. */
 export const spacing = {
   section: "clamp(4rem, 10vw, 8rem)",
+  /** Generous gap between homepage "chapters" (v0.3 journey structure) — larger than `section` so the pacing itself reads as deliberate dead space. */
+  chapter: "clamp(6rem, 16vw, 12rem)",
   gutter: "clamp(1.25rem, 5vw, 2rem)",
 } as const;
 

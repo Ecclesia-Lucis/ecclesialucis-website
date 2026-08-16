@@ -3,6 +3,7 @@ import { Fraunces, Manrope } from "next/font/google";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { site } from "@/content/site";
+import { darkTheme, lightTheme } from "@/lib/tokens";
 import "./globals.css";
 
 // Humanist high-contrast serif for headings; geometric sans for body
@@ -38,8 +39,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: dark)", color: "#0a0a12" },
-    { media: "(prefers-color-scheme: light)", color: "#faf8f3" },
+    { media: "(prefers-color-scheme: dark)", color: darkTheme.base },
+    { media: "(prefers-color-scheme: light)", color: lightTheme.base },
   ],
 };
 

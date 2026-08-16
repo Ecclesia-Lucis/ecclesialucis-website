@@ -6,7 +6,7 @@ import { cn } from "@/lib/cn";
  * (design-system spec: "Iconography and visual motifs"). Icons are authored
  * as inline SVG paths here — no external icon-library dependency — so pages
  * draw from one shared, token-aware set instead of one-off per-page assets.
- * The hero's `.glow-field-hero` light-source treatment (app/globals.css) is
+ * The hero's `.spectrum-bleed-hero` light-source treatment (app/globals.css) is
  * the first visual motif built on this direction; further icons/motifs are
  * added here as future pages need them (see docs/ROADMAP.md Phase 2 polish).
  */

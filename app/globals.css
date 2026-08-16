@@ -6,7 +6,7 @@
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
-    color-scheme: dark light;
+    color-scheme: light dark;
   }
 
   body {
@@ -40,45 +40,71 @@
 }
 
 @layer components {
-  /* Soft radial "light in the dark" glow used behind hero sections. */
-  .glow-field {
+  /*
+   * Spectrum-bleed edge glow (v0.3 "explosion of light" — replaces v0.1's
+   * single-hue `glow-field`): white bleeds into the full visible-light
+   * spectrum at the viewport perimeter. Anchored to the four corners so it
+   * never approaches the centered content measure (`max-w-content`),
+   * opacity-limited well below anything that could threaten foreground text
+   * contrast. aria-hidden at the usage site; drift is motion-safe-gated.
+   */
+  .spectrum-bleed {
     background:
       radial-gradient(
-        60% 55% at 50% 0%,
-        color-mix(in oklab, var(--color-accent) 22%, transparent) 0%,
+        38% 46% at 0% 0%,
+        color-mix(in oklab, var(--color-spectrum-accent1) 16%, transparent) 0%,
         transparent 70%
       ),
       radial-gradient(
-        40% 40% at 85% 20%,
-        color-mix(in oklab, var(--color-accent-soft) 14%, transparent) 0%,
+        38% 46% at 100% 0%,
+        color-mix(in oklab, var(--color-spectrum-accent3) 16%, transparent) 0%,
+        transparent 70%
+      ),
+      radial-gradient(
+        38% 46% at 0% 100%,
+        color-mix(in oklab, var(--color-spectrum-accent5) 14%, transparent) 0%,
+        transparent 70%
+      ),
+      radial-gradient(
+        38% 46% at 100% 100%,
+        color-mix(in oklab, var(--color-spectrum-accent6) 14%, transparent) 0%,
         transparent 70%
       );
   }
 
   /*
-   * Hero light-source treatment (design.md decision): a brighter, centered
-   * layered glow standing in for a literal light-source image/animation,
-   * without a canvas/WebGL dependency. Meant to sit on its own absolutely
-   * positioned layer behind hero text, animated via the existing `drift`
-   * keyframe (motion-safe / prefers-reduced-motion-gated) rather than moving
-   * the text itself.
+   * Hero spectrum-bleed (replaces v0.1's `glow-field-hero`): a fuller
+   * ROYGBIV sweep bleeding in from all four edges behind the near-silent
+   * hero, brighter than the interior-page `.spectrum-bleed` but still
+   * edge-anchored and opacity-limited so it never sits under the centered
+   * hero text at any but the lowest alpha.
    */
-  .glow-field-hero {
+  .spectrum-bleed-hero {
     background:
       radial-gradient(
-        46% 42% at 50% 34%,
-        color-mix(in oklab, var(--color-accent) 38%, transparent) 0%,
+        42% 50% at 0% 0%,
+        color-mix(in oklab, var(--color-spectrum-accent1) 24%, transparent) 0%,
         transparent 72%
       ),
       radial-gradient(
-        70% 60% at 50% 30%,
-        color-mix(in oklab, var(--color-accent-soft) 20%, transparent) 0%,
+        42% 50% at 100% 0%,
+        color-mix(in oklab, var(--color-spectrum-accent2) 22%, transparent) 0%,
+        transparent 72%
+      ),
+      radial-gradient(
+        50% 56% at 50% 0%,
+        color-mix(in oklab, var(--color-spectrum-accent3) 16%, transparent) 0%,
         transparent 75%
       ),
       radial-gradient(
-        90% 70% at 50% 15%,
-        color-mix(in oklab, var(--color-accent-soft) 10%, transparent) 0%,
-        transparent 80%
+        42% 50% at 0% 100%,
+        color-mix(in oklab, var(--color-spectrum-accent5) 20%, transparent) 0%,
+        transparent 72%
+      ),
+      radial-gradient(
+        42% 50% at 100% 100%,
+        color-mix(in oklab, var(--color-spectrum-accent6) 20%, transparent) 0%,
+        transparent 72%
       );
   }
 
@@ -88,5 +114,133 @@
 
   .prose-doctrine p + p {
     @apply mt-5;
+  }
+
+  /*
+   * Wayfinding thread (design-system spec: "Wayfinding-thread scroll motif").
+   * The SVG path's stroke draws in as the visitor scrolls the homepage,
+   * driven by the document's scroll progress. Progressive enhancement:
+   * browsers without `animation-timeline` support, and visitors with
+   * prefers-reduced-motion, get the fully-drawn static line.
+   */
+  .wayfinding-thread path {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    opacity: 0.55;
+    animation: thread-reveal linear both;
+    animation-timeline: scroll();
+    animation-range: 0% 92%;
+  }
+
+  @supports not (animation-timeline: scroll()) {
+    .wayfinding-thread path {
+      stroke-dashoffset: 0;
+      animation: none;
+    }
+  }
+
+  /*
+   * Scroll-triggered chapter reveal (marketing-pages spec: "Homepage
+   * presented as a sequence of distinctly-composed chapters"). Applied to
+   * each doctrine chapter; progressive enhancement mirrors the thread motif.
+   */
+  .chapter-reveal {
+    opacity: 0;
+    transform: translateY(2.5rem);
+    animation: chapter-reveal-in linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 35%;
+  }
+
+  @supports not (animation-timeline: view()) {
+    .chapter-reveal {
+      opacity: 1;
+      transform: none;
+      animation: none;
+    }
+  }
+
+  /*
+   * Expanding-text-box reveal (design-system spec: "Expanding-text-box
+   * reveal"). The detail panel's height animates from 0fr to 1fr as it
+   * scrolls into view via the CSS-grid auto-height trick, so no JS height
+   * measurement is needed. Progressive enhancement mirrors the thread motif.
+   */
+  .expand-box {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    animation: expand-reveal linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 40%;
+  }
+
+  .expand-box > * {
+    overflow: hidden;
+  }
+
+  @supports not (animation-timeline: view()) {
+    .expand-box {
+      grid-template-rows: 1fr;
+      opacity: 1;
+      animation: none;
+    }
+  }
+}
+
+@layer utilities {
+  @keyframes thread-reveal {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @keyframes chapter-reveal-in {
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /*
+   * Hand-written here (not in tailwind.config.ts) because it's consumed
+   * only via the raw `animation:` property on `.expand-box` below, never as
+   * a literal `animate-*` utility class — Tailwind's content scanner can't
+   * see that usage, so a config-defined keyframe with no matching class
+   * reference gets purged from the production build. Keeping it in plain
+   * CSS, like `thread-reveal` and `chapter-reveal-in` above, sidesteps that.
+   */
+  @keyframes expand-reveal {
+    to {
+      grid-template-rows: 1fr;
+      opacity: 1;
+    }
+  }
+}
+
+/*
+ * Reduced motion: collapse every v0.3 scroll-driven/one-shot motif to its
+ * instant, fully-visible/expanded end-state (design-system spec: "Motion
+ * respects reduced-motion preference"). The global animation-duration
+ * override in tailwind.config.ts already neutralizes timed animations; the
+ * rules below explicitly pin the scroll-timeline-driven motifs' end-state
+ * since their "duration" is scroll progress, not time.
+ */
+@media (prefers-reduced-motion: reduce) {
+  .wayfinding-thread path {
+    stroke-dashoffset: 0;
+    animation: none;
+  }
+
+  .chapter-reveal {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+
+  .expand-box {
+    grid-template-rows: 1fr;
+    opacity: 1;
+    animation: none;
   }
 }
