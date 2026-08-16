@@ -40,7 +40,7 @@ export default function CommunityPage() {
               </ul>
             </div>
 
-            <div className="glow-field rounded-2xl border border-border bg-surface p-8 text-center sm:p-10">
+            <div className="spectrum-bleed rounded-2xl border border-border bg-surface p-8 text-center sm:p-10">
               <h2 className="font-display text-2xl font-semibold text-ink">Join us on Discord</h2>
               <p className="mt-4 leading-relaxed text-ink-muted">{community.reassurance}</p>
               <div className="mt-8">

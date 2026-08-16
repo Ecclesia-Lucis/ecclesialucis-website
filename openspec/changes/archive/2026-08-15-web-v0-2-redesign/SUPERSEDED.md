@@ -1,0 +1,1 @@
+Superseded by `web-v0-3-explosion-of-light` (2026-08-15) — never applied. See `docs/design/v0-3-radical-light-vision.md` §3 for the rationale; v0.3 reuses this change's palette-token engineering (`spectrumAccent1..6`, theme-role-swap, AA contrast targets) but replaces its hero/homepage decisions rather than building on top of them.

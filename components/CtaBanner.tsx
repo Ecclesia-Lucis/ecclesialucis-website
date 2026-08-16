@@ -13,7 +13,7 @@ export function CtaBanner() {
   return (
     <Section>
       <Container>
-        <div className="glow-field overflow-hidden rounded-3xl border border-border bg-surface px-6 py-14 text-center sm:px-12 sm:py-20">
+        <div className="spectrum-bleed overflow-hidden rounded-3xl border border-border bg-surface px-6 py-14 text-center sm:px-12 sm:py-20">
           <h2 className="mx-auto max-w-2xl text-3xl font-semibold tracking-tight sm:text-4xl">
             When you’re ready, there are others walking this path
           </h2>

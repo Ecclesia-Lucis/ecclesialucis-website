@@ -1,124 +1,169 @@
 import Link from "next/link";
-import { Button } from "@/components/Button";
-import { Card } from "@/components/Card";
 import { CtaBanner } from "@/components/CtaBanner";
-import { Container, Eyebrow, Section } from "@/components/Section";
-import { primaryCta, site } from "@/content/site";
+import { ExpandingText } from "@/components/ExpandingText";
+import { GraphicTextChapter } from "@/components/GraphicTextChapter";
+import { HeroParticlesGate } from "@/components/HeroParticlesGate";
+import { KineticWordmark } from "@/components/KineticWordmark";
+import { PullQuote } from "@/components/PullQuote";
+import { Container, Section } from "@/components/Section";
+import { WayfindingThread } from "@/components/WayfindingThread";
+import { covenant } from "@/content/covenant";
+import { site } from "@/content/site";
 
-/** "Each an explorer on their own journey" — split out from the hero into its own section. */
+/** "Each an explorer on their own journey" — the first motion after the hero's stillness. */
 const explorerStatement =
   "A faith where each is an explorer on their own journey.";
 
-const doctrineTeasers = [
-  {
+const doctrineTeasers = {
+  purpose: {
     href: "/purpose",
     label: "Purpose",
     blurb: "We are beings formed from light. If we are of light, our responsibility is to increase it.",
   },
-  {
+  tenets: {
     href: "/tenets",
     label: "Tenets",
     blurb: "Eleven provisional principles — truth, empathy, ecology, restraint — offered as guidance, not commandments.",
   },
-  {
+  practices: {
     href: "/practices",
     label: "Practices",
-    blurb: "Eight optional practices for tending to light in yourself, in others, and in the world. Tools, not tests.",
+    statement: "Eight optional practices for tending to light in yourself, in others, and in the world.",
+    detail: "Tools, not tests.",
   },
-  {
-    href: "/covenant",
-    label: "Covenant",
-    blurb: "The safeguards: no authority over others, no required belief, no monetized legitimacy, no coercion.",
-  },
-];
+} as const;
+
+/** Small "continue reading" link — internal doctrine navigation, distinct from the shared primary-CTA Button (doctrine-before-conversion IA). */
+function ChapterLink({ href, children }: { href: string; children: React.ReactNode }) {
+  return (
+    <Link
+      href={href}
+      className="group mt-5 inline-flex items-center gap-1.5 font-semibold text-accent transition-colors hover:text-ink"
+    >
+      {children}
+      <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-1">
+        →
+      </span>
+    </Link>
+  );
+}
 
 export default function HomePage() {
   return (
-    <>
-      {/* Hero — centered name → meaning → statement sequence, identity + "what
-          this is not" stay above the fold beneath it (REQ-HOME-001). */}
+    <div className="relative">
+      <WayfindingThread />
+
+      {/* Hero — near-silent (docs/design/v0-3-radical-light-vision.md §1 point
+          8): only the name renders in the first screen. No identity
+          statement, no disclaimer, no CTA here — see "the turn" below. */}
       <Section
         as="header"
-        className="relative flex min-h-[88vh] items-center overflow-hidden py-24 sm:min-h-[84vh]"
+        className="relative flex min-h-[92vh] items-center justify-center overflow-hidden py-24 sm:min-h-[88vh]"
         spacious={false}
       >
         <div
           aria-hidden
-          className="glow-field-hero motion-safe:animate-drift pointer-events-none absolute inset-0"
+          className="spectrum-bleed-hero motion-safe:animate-spectrum-drift pointer-events-none absolute inset-0"
         />
-        <Container className="motion-safe:animate-fade-up relative mx-auto flex flex-col items-center text-center">
-          <p className="text-sm font-semibold uppercase tracking-[0.35em] text-ink-subtle sm:text-[1rem]">
-            {site.name}
-          </p>
-          <p className="mt-3 text-balance font-display text-3xl font-semibold tracking-tight text-ink sm:text-5xl">
+        <HeroParticlesGate />
+        <Container className="relative flex flex-col items-center text-center">
+          <p className="text-sm font-semibold uppercase tracking-[0.35em] text-ink-muted sm:text-base">
             {site.tagline}
           </p>
-          <h1 className="mt-6 text-balance font-display text-5xl font-semibold italic leading-[1.05] tracking-tight text-accent sm:text-7xl">
-            A faith of equals
-          </h1>
-          <p className="mt-8 max-w-2xl text-lg leading-relaxed text-ink-muted sm:text-xl">
-            {site.identity}
-          </p>
-          <p className="mt-4 max-w-2xl text-base leading-relaxed text-ink-subtle">
-            <span className="font-semibold text-ink">What this is not: </span>
-            {site.whatThisIsNot}
-          </p>
-          <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-center">
-            <Button href="/purpose" size="lg">
-              Read the doctrine
-            </Button>
-            <Button href={primaryCta.href} variant="secondary" size="lg">
-              {primaryCta.label}
-            </Button>
-          </div>
+          <KineticWordmark
+            as="h1"
+            className="mt-4 text-balance font-display text-6xl leading-[1.05] text-ink sm:text-8xl"
+          >
+            {site.name}
+          </KineticWordmark>
         </Container>
       </Section>
 
-      {/* Explorer statement — "each an explorer on their own journey," distinct
-          from the hero's focal statement, leading into the doctrine teasers. */}
-      <Section spacious={false} className="pb-0 pt-16 sm:pt-20">
+      {/* The turn — the explorer statement arrives alone, as an
+          expanding-text-box reveal; scrolling it into view discloses the
+          identity statement and "what this is not" disclaimer, relocated
+          here from the hero per the founder's Section 2 sign-off
+          (marketing-pages spec: "Homepage identity statement above the
+          fold"). Reachable with a single scroll, no click. */}
+      <Section spacious={false} className="pt-chapter">
         <Container>
-          <p className="max-w-3xl text-balance font-display text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
-            {explorerStatement}
+          <ExpandingText
+            className="mx-auto max-w-3xl text-center"
+            statement={
+              <p className="text-balance font-display text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
+                {explorerStatement}
+              </p>
+            }
+            detail={
+              <div className="mx-auto max-w-2xl text-center">
+                <p className="text-lg leading-relaxed text-ink-muted sm:text-xl">{site.identity}</p>
+                <p className="mt-4 text-base leading-relaxed text-ink-subtle">
+                  <span className="font-semibold text-ink">What this is not: </span>
+                  {site.whatThisIsNot}
+                </p>
+              </div>
+            }
+          />
+        </Container>
+      </Section>
+
+      {/* Purpose — left-aligned text + graphic. */}
+      <Section spacious={false} className="pt-chapter">
+        <Container>
+          <GraphicTextChapter align="left" eyebrow="Doctrine" title={doctrineTeasers.purpose.label}>
+            <p>{doctrineTeasers.purpose.blurb}</p>
+            <ChapterLink href={doctrineTeasers.purpose.href}>Read Purpose</ChapterLink>
+          </GraphicTextChapter>
+        </Container>
+      </Section>
+
+      {/* Tenets — mirrored: right-aligned text + graphic, deliberately asymmetric from Purpose. */}
+      <Section spacious={false} className="pt-chapter">
+        <Container>
+          <GraphicTextChapter align="right" eyebrow="Doctrine" title={doctrineTeasers.tenets.label}>
+            <p>{doctrineTeasers.tenets.blurb}</p>
+            <ChapterLink href={doctrineTeasers.tenets.href}>Read the Tenets</ChapterLink>
+          </GraphicTextChapter>
+        </Container>
+      </Section>
+
+      {/* Practices — expanding-text-box reveal: the collapsed statement grows to reveal the rest on scroll-into-view. */}
+      <Section spacious={false} className="pt-chapter">
+        <Container className="mx-auto max-w-2xl text-center">
+          <p className="font-body text-sm font-semibold uppercase tracking-[0.2em] text-accent">
+            {doctrineTeasers.practices.label}
+          </p>
+          <ExpandingText
+            className="mt-3"
+            statement={
+              <h3 className="text-balance font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
+                {doctrineTeasers.practices.statement}
+              </h3>
+            }
+            detail={
+              <>
+                <p>{doctrineTeasers.practices.detail}</p>
+                <ChapterLink href={doctrineTeasers.practices.href}>Read the Practices</ChapterLink>
+              </>
+            }
+          />
+        </Container>
+      </Section>
+
+      {/* Covenant — pull-quote treatment, distinct again from the three chapters above. */}
+      <Section spacious={false} className="pt-chapter">
+        <Container>
+          <PullQuote size="chapter">{covenant.pullQuote}</PullQuote>
+          <p className="mt-6 text-center">
+            <ChapterLink href="/covenant">Read the Covenant</ChapterLink>
           </p>
         </Container>
       </Section>
 
-      {/* Doctrine teaser — doctrine is reachable before any conversion ask. */}
-      <Section>
-        <Container>
-          <div className="max-w-2xl">
-            <Eyebrow>Start here</Eyebrow>
-            <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-              Understand it fully before you decide anything
-            </h2>
-            <p className="mt-5 text-lg leading-relaxed text-ink-muted">
-              The doctrine is open and free to read — no sign-up, no gate. Take it at your own pace.
-            </p>
-          </div>
-
-          <div className="mt-12 grid gap-5 sm:grid-cols-2">
-            {doctrineTeasers.map((item) => (
-              <Link key={item.href} href={item.href} className="group">
-                <Card interactive className="h-full">
-                  <div className="flex items-center justify-between">
-                    <h3 className="font-display text-xl font-semibold text-ink">{item.label}</h3>
-                    <span
-                      aria-hidden
-                      className="text-ink-subtle transition-transform duration-300 group-hover:translate-x-1 group-hover:text-accent"
-                    >
-                      →
-                    </span>
-                  </div>
-                  <p className="mt-3 leading-relaxed text-ink-muted">{item.blurb}</p>
-                </Card>
-              </Link>
-            ))}
-          </div>
-        </Container>
-      </Section>
-
-      <CtaBanner />
-    </>
+      {/* CTA — still arrives only after every doctrine chapter above (doctrine-before-conversion IA, CLAUDE.md content rule #3), unchanged in position and copy. */}
+      <div className="pt-chapter">
+        <CtaBanner />
+      </div>
+    </div>
   );
 }
