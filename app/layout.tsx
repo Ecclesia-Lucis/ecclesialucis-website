@@ -3,7 +3,7 @@ import { Fraunces, Manrope } from "next/font/google";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { site } from "@/content/site";
-import { darkTheme, lightTheme } from "@/lib/tokens";
+import { lightTheme } from "@/lib/tokens";
 import "./globals.css";
 
 // Humanist high-contrast serif for headings; geometric sans for body
@@ -38,10 +38,9 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: dark)", color: darkTheme.base },
-    { media: "(prefers-color-scheme: light)", color: lightTheme.base },
-  ],
+  // The site no longer auto-switches to dark on `prefers-color-scheme: dark`
+  // (tailwind.config.ts), so the browser chrome color stays the light base too.
+  themeColor: lightTheme.base,
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

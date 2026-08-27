@@ -6,7 +6,7 @@
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
-    color-scheme: light dark;
+    color-scheme: light;
   }
 
   body {

@@ -12,7 +12,7 @@ export const covenant = {
   title: "How this protects you",
   intro: [
     "This protocol is offered freely and without expectation.",
-    "By engaging with Ecclesia Lucis materials, contributors and practitioners agree to a short set of principles — safeguards meant to protect both participants and the integrity of the protocol itself.",
+    "By engaging with Ecclesia Lucis materials, contributors and practitioners agree to a short set of principles: safeguards meant to protect both participants and the integrity of the protocol itself.",
   ],
   /** Trust-building pull-quote near the top (docs/CONTENT_STRATEGY.md). */
   pullQuote: "Interpretation is individual. Practice is voluntary. Departure requires no justification.",
@@ -23,7 +23,7 @@ export const covenant = {
     },
     {
       title: "No requirement of belief, participation, or allegiance",
-      body: "You are free to engage, adapt, or step away — on your own terms.",
+      body: "You are free to engage, adapt, or step away, on your own terms.",
     },
     {
       title: "No monetization of legitimacy or access",
@@ -40,7 +40,7 @@ export const covenant = {
   ],
   enforcement: {
     title: "When conditions are violated",
-    body: "The appropriate response is disengagement — not enforcement. This covenant exists to protect both participants and the integrity of the protocol itself.",
+    body: "The appropriate response is disengagement, not enforcement. This covenant exists to protect both participants and the integrity of the protocol itself.",
   },
   governance: {
     eyebrow: "Governance",

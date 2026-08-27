@@ -16,7 +16,7 @@ export const purpose = {
   eyebrow: "Purpose",
   title: "Why Ecclesia Lucis exists",
   intro:
-    "Ecclesia Lucis exists to offer an alternative spiritual path for those seeking meaning, connection, and ethical grounding — without dogma, coercion, or hierarchy.",
+    "Ecclesia Lucis exists to offer an alternative spiritual path for those seeking meaning, connection, and ethical grounding, without dogma, coercion, or hierarchy.",
   /** Surfaced as a pull-quote; it is the emotional core of the doctrine. */
   pullQuote: "If we are of light, our responsibility is to increase light.",
   passages: [
@@ -39,14 +39,14 @@ export const purpose = {
       paragraphs: [
         "Light gives rise to life. It sustains the planet, its ecosystems, the water we drink, and the air we breathe. There are forms of light beyond human perception, existing whether we can sense them or not.",
         "Across cultures and centuries, this has often been described as a soul, a force, or an animating principle. Within Ecclesia Lucis, “light” is the term used for this shared mystery.",
-        "If a concept such as “god” exists, we do not define it as a separate ruler or authority, but as something closer to a universal phenomenon — of which each individual life may be understood as an infinitesimal expression.",
+        "If a concept such as “god” exists, we do not define it as a separate ruler or authority, but as something closer to a universal phenomenon, of which each individual life may be understood as an infinitesimal expression.",
       ],
     },
     {
       heading: "To increase light is to tend and to share",
       paragraphs: [
-        "This begins with tending to the darkness within ourselves — through reflection, healing, and evidence-based practices drawn from psychology, philosophy, and the sciences. It continues through connection, care, and material action in the world.",
-        "Growing food, sharing sustenance, and offering comfort to others are sacred acts — not because they are symbolic, but because they directly sustain life. Light that is shared multiplies; light that is hoarded diminishes.",
+        "This begins with tending to the darkness within ourselves, through reflection, healing, and evidence-based practices drawn from psychology, philosophy, and the sciences. It continues through connection, care, and material action in the world.",
+        "Growing food, sharing sustenance, and offering comfort to others are sacred acts: not because they are symbolic, but because they directly sustain life. Light that is shared multiplies; light that is hoarded diminishes.",
       ],
     },
   ] satisfies Passage[],

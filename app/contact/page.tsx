@@ -28,7 +28,7 @@ export default function ContactPage() {
           <div className="rounded-2xl border border-border bg-surface p-8 sm:p-10">
             <h2 className="font-display text-xl font-semibold text-ink">Email us</h2>
             <p className="mt-3 leading-relaxed text-ink-muted">
-              Write to us directly — no account required. We read everything, and we reply as time
+              Write to us directly, no account required. We read everything, and we reply as time
               allows.
             </p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">

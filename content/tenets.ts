@@ -32,7 +32,7 @@ export const tenets = {
     {
       version: "v0.1",
       name: "Truth",
-      body: "Seek understanding through the best available evidence while recognizing that all knowledge is provisional. Favor inquiry, skepticism, and revision over certainty, and treat the scientific method as a powerful — but not exclusive — tool for understanding reality.",
+      body: "Seek understanding through the best available evidence while recognizing that all knowledge is provisional. Favor inquiry, skepticism, and revision over certainty, and treat the scientific method as a powerful (but not exclusive) tool for understanding reality.",
     },
     {
       version: "v0.2",

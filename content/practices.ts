@@ -33,7 +33,7 @@ export const practices = {
       number: 1,
       name: "Reflection",
       summary:
-        "Attending to one’s own experience with honesty and humility. The aim is not certainty, but clarity — asking what you feel, what you avoid, where you cause harm, and where you are capable of repair.",
+        "Attending to one’s own experience with honesty and humility. The aim is not certainty, but clarity: asking what you feel, what you avoid, where you cause harm, and where you are capable of repair.",
       items: [
         "Quiet contemplation",
         "Journaling or written inquiry",
@@ -46,7 +46,7 @@ export const practices = {
       number: 2,
       name: "Repair",
       summary:
-        "Addressing harm — internal, relational, or material — rather than denying or spiritualizing it. Repair is a sacred act because it increases light by reducing unnecessary suffering.",
+        "Addressing harm (internal, relational, or material) rather than denying or spiritualizing it. Repair is a sacred act because it increases light by reducing unnecessary suffering.",
       items: [
         "Apology without expectation of forgiveness",
         "Reconciliation where safe and consensual",
@@ -82,7 +82,7 @@ export const practices = {
       number: 5,
       name: "Rest",
       summary:
-        "Honoring physical and mental limits. Rest is not laziness — it is maintenance of the light-bearing system.",
+        "Honoring physical and mental limits. Rest is not laziness. It is maintenance of the light-bearing system.",
       items: [
         "Sleep",
         "Stillness",
@@ -96,14 +96,14 @@ export const practices = {
       optional: true,
       summary:
         "People choosing to be present with one another in shared reflection or service. Gatherings are not sermons; no individual speaks with spiritual authority over others.",
-      items: ["Conversation", "Silence", "Shared meals", "Collaborative labor — gardening, repair, service"],
+      items: ["Conversation", "Silence", "Shared meals", "Collaborative labor: gardening, repair, service"],
     },
     {
       number: 7,
       name: "Ceremonial Moments",
       optional: true,
       summary:
-        "Certain moments in life — birth, partnership, death — benefit from intentional marking. Ceremonies are witnesses, not validations; expressions of meaning, not control. No ceremony binds belief or allegiance.",
+        "Certain moments in life, such as birth, partnership, or death, benefit from intentional marking. Ceremonies are witnesses, not validations; expressions of meaning, not control. No ceremony binds belief or allegiance.",
       items: [
         "Consensual by all involved",
         "Free of gender, familial, or hierarchical coercion",

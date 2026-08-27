@@ -1,15 +1,11 @@
 ## MODIFIED Requirements
 
 ### Requirement: "Light in the dark" visual concept
-The system SHALL implement a light-mode-first palette with a true bright-white/near-white base (`#ffffff`–`#fdfdfb`) and near-black ink, paired with a small set of bright, saturated accent colors drawn from the visible light spectrum (`spectrumAccent1..6`, a compressed ROYGBIV), per `docs/design/v0-3-radical-light-vision.md` §4.1. The prior dark, near-black/indigo palette with a single gold/amber accent SHALL remain available as an equally-polished secondary theme (dark-mode alternate). Typography pairing (humanist/high-contrast serif for headings, geometric sans for body) is unchanged.
+The system SHALL implement a light-mode-first palette with a true bright-white/near-white base (`#ffffff`–`#fdfdfb`) and near-black ink, paired with a small set of bright, saturated accent colors drawn from the visible light spectrum (`spectrumAccent1..6`, a compressed ROYGBIV), per `docs/design/v0-3-radical-light-vision.md` §4.1. **Revised 2026-08-27 per founder feedback:** the bright palette SHALL render for every visitor regardless of their OS-level `prefers-color-scheme` setting — the site SHALL NOT automatically switch to a dark palette for visitors whose system is set to dark mode. A dark-theme token set (`darkTheme` in `lib/tokens.ts`) MAY remain defined in code for a possible future manual light/dark toggle, but it SHALL NOT be applied automatically. Typography pairing (humanist/high-contrast serif for headings, geometric sans for body) is unchanged.
 
-#### Scenario: Default theme is bright white
-- **WHEN** a visitor loads any page with no OS-level theme preference expressed, or with `prefers-color-scheme: light`
-- **THEN** the page renders the true bright-white/near-white base, near-black ink, bright-spectrum-accent palette as the visual default
-
-#### Scenario: Dark theme remains available and complete
-- **WHEN** a visitor has `prefers-color-scheme: dark` set
-- **THEN** the page renders a fully-styled dark alternate theme (not a stripped-down fallback), with the same component set and layout as the light theme
+#### Scenario: Bright theme renders regardless of OS preference
+- **WHEN** a visitor loads any page, whether their OS/browser is set to `prefers-color-scheme: light`, `dark`, or no preference
+- **THEN** the page renders the true bright-white/near-white base, near-black ink, bright-spectrum-accent palette in every case
 
 #### Scenario: Spectrum accents used sparingly, not as full-bleed color blocks
 - **WHEN** spectrum accent colors are applied to any UI element (links, underlines, icons, small decorative fills)

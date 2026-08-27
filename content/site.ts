@@ -9,7 +9,7 @@ export const site = {
   tagline: "The Church of Light",
   /** One-sentence identity statement — used above the fold on Home (REQ-HOME-001). */
   identity:
-    "Ecclesia Lucis is an open, non-hierarchical spiritual path for people seeking meaning, connection, and ethical grounding — without dogma, coercion, or hierarchy.",
+    "Ecclesia Lucis is an open, non-hierarchical spiritual path for people seeking meaning, connection, and ethical grounding, without dogma, coercion, or hierarchy.",
   /** One-sentence "what this is not" disclaimer — the skeptic's first question, answered up front. */
   whatThisIsNot: "No hierarchy, no clergy, no required beliefs, no fees.",
   domain: "ecclesialucis.org",
@@ -55,4 +55,4 @@ export const footerConnectLinks: NavLink[] = [
  * claim, until REQ-LEGAL-001 is unblocked (site-scaffold spec, design.md).
  */
 export const legalStatus =
-  "Nonprofit status: pending — organizational registration is in progress. Nothing here is tax, legal, medical, or financial advice.";
+  "Nonprofit status: pending. Organizational registration is in progress. Nothing here is tax, legal, medical, or financial advice.";

@@ -105,11 +105,11 @@ const config: Config = {
       addBase({
         // Light (true-white base) is the authored default — v0.3 theme-role swap.
         ":root": themeVars(lightTheme),
-        // Dark theme when the visitor's system prefers dark — equally polished
-        // secondary alternate, no persisted override needed for v1.
-        "@media (prefers-color-scheme: dark)": {
-          ":root": themeVars(darkTheme),
-        },
+        // The founder wants the bright/white identity to be what every visitor
+        // sees, not something that flips to dark based on their OS setting —
+        // so the site no longer auto-switches on `prefers-color-scheme: dark`.
+        // `darkTheme` (lib/tokens.ts) is kept, unused for now, in case a
+        // future manual light/dark toggle is wanted.
         // Disable decorative motion for visitors who ask for it (design-system spec).
         "@media (prefers-reduced-motion: reduce)": {
           "*, *::before, *::after": {

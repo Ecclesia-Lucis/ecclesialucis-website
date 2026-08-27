@@ -23,7 +23,7 @@ const doctrineTeasers = {
   tenets: {
     href: "/tenets",
     label: "Tenets",
-    blurb: "Eleven provisional principles — truth, empathy, ecology, restraint — offered as guidance, not commandments.",
+    blurb: "Eleven provisional principles (truth, empathy, ecology, restraint) offered as guidance, not commandments.",
   },
   practices: {
     href: "/practices",
