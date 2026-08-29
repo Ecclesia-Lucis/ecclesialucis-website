@@ -2,7 +2,7 @@
 
 **Version:** 1.0 (initial plan)
 **Date:** 2026-08-13
-**Status (updated 2026-08-14):** Phase 0 and Phase 1 complete — built and deployed as a single unattended OpenSpec change (`v0-1-website-build`, now archived at `openspec/changes/archive/2026-08-14-v0-1-website-build/`, specs synced to `openspec/specs/`) via the pipeline in `docs/AGENTIC_BUILD.md`. Live at `ecclesialucis-website.vercel.app`, merged to `main`, pending founder review/revision notes. Phase 2 (Polish & Launch Readiness) has not started. See `docs/DEPENDENCIES.md` for the current open-items list.
+**Status (updated 2026-08-28):** Phase 0 and Phase 1 complete. Two further founder-directed revision passes have since shipped and archived beyond the original v0.1 scope this roadmap describes: `2026-08-28-home-hero-refresh-and-wavelets-rename` and `2026-08-28-web-v0-3-explosion-of-light` (see `CLAUDE.md` "Current status" and `openspec/changes/archive/`) — treat this roadmap's Phase 0/1 task descriptions as historical, and `openspec/specs/` plus `docs/CONTENT_STRATEGY.md` as current truth for what's actually live. Phase 2 (Polish & Launch Readiness) has still not started. A "Threshold" scroll-driven redesign is being scoped as a further revision on top of v0.3 — see `docs/DEPENDENCIES.md` "Open Issues Register". See `docs/DEPENDENCIES.md` for the current open-items list.
 
 This roadmap breaks the project into phases and workstreams, assigns each workstream to an agent type/model, and marks what can run in parallel vs. what's on the critical path. It follows the same batching pattern the org already used successfully in `application/LightPath/plans/roadmap.md`, adapted for a content/marketing site instead of a full-stack app.
 

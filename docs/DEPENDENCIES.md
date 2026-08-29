@@ -9,6 +9,43 @@ This is the single source of truth for "can an agent just do this, or does it ne
 
 ---
 
+## Open Issues Register (updated 2026-08-28)
+
+**Read this section first.** It's the complete current list of things that need a founder decision or a task before more design/build work should land on top of them. When an item resolves, move it to the "Resolved" group with the date; when a new conflict or open question surfaces, add it here rather than letting it live only in a chat transcript.
+
+### 🔴 Open — needs a founder decision before dependent work proceeds
+
+1. **REQ-HOME-001 conflict: hero identity statement shipped below the fold, without the sign-off its own change required.**
+   - **What:** `docs/PRD.md` REQ-HOME-001 requires a one-sentence identity statement and "what this is not" disclaimer above the fold. The live v0.3 homepage hero is near-silent (name + tagline only) — both moved to a scroll-reveal section below the fold. The proposal that made this change (`web-v0-3-explosion-of-light`) explicitly said its hero task "SHALL NOT be executed... until the founder has explicitly approved" one of two options. No approval is recorded anywhere in this repo, yet the task shipped and is live in production today.
+   - **Why it matters:** this is a live gap between the shipped site and this project's own source-of-truth requirements doc, on the exact page section (the hero) meant to build trust with the "curious skeptic" persona (`docs/PRD.md` §1.3).
+   - **Your call:** (a) approve the relocation as shipped — an agent then updates `docs/PRD.md` REQ-HOME-001 and syncs `openspec/specs/marketing-pages/spec.md` to match (currently deliberately left in its original above-the-fold wording); or (b) require the identity statement/disclaimer return above the fold — an agent files a `/opsx:propose` change against the current hero.
+   - **Status:** OPEN, undecided. Flagged in `CLAUDE.md` and `docs/PRD.md` as of 2026-08-28.
+
+2. **"Exploration-style" navigation is undefined.**
+   - **What:** you want primary navigation (links to Purpose/Tenets/Practices/Covenant/Community/etc., REQ-NAV-001) to feel like exploration rather than a conventional nav bar, in the spirit of the new "Threshold" scroll prototype (item 3). No concrete mechanism has been chosen yet — a hover-triggered edge menu was raised as an example of the kind of idea this covers, not a decision.
+   - **Why it matters:** blocks writing a spec for site-wide navigation under the Threshold aesthetic, and blocks any interior-page rollout of that aesthetic — an agent cannot implement an undefined interaction, and two independently-proposed navigation designs would conflict.
+   - **Your call:** review 2-3 concrete options (to be drafted in the Threshold change's `design.md` once proposed) and pick one, or send more of your own ideas first.
+   - **Status:** OPEN — not yet proposed. This is the item that prompted this register.
+
+3. **"Threshold" scroll-driven redesign — validated, not yet filed as a change.**
+   - **What:** a scroll-driven homepage redesign (dust-dissolve "inverted blackhole" imagery, alternating light/void iris-reveal transitions, Odibee Sans display + DM Sans body typography, scattered "mote" doctrine content instead of cards) was built and iterated as a standalone prototype and approved by you as the direction to continue. It has not yet been run through `/opsx:propose` against the current `openspec/specs/` baseline.
+   - **Why it matters:** this would replace large parts of the v0.3 baseline just reconciled above — v0.3's bright spectrum-accent palette vs. Threshold's paper/void inversion, typography pairing changes, and the fate of the existing `WayfindingThread` component (built for v0.3, full-homepage-length SVG thread motif) is undecided under the new visual language.
+   - **Your call:** none needed to *start* scoping — but item 2 (navigation) should be drafted as part of this proposal's `design.md`, not decided separately, per the note left in that item.
+   - **Status:** OPEN, scoping in progress in the current session.
+
+### 🟡 Open — needs confirmation, but not blocking current work
+
+4. EIN/501(c)(3) status — see Accounts & Access item 6 below. Still blocks only REQ-LEGAL-001 and the Phase 3 launch gate, not Phase 2 polish or the Threshold work.
+5. Whether `assets/brand/*.png` are final logos — see Decisions item 3 below. Unrelated to the newer "inverted blackhole" image supplied specifically for the Threshold direction, which is a separate asset with its own (settled) status as a real production asset for that work.
+
+### 🟢 Resolved this session (2026-08-28)
+
+6. **OpenSpec baseline hygiene.** Two changes — `home-hero-refresh-and-wavelets-rename` and `web-v0-3-explosion-of-light` — were fully implemented via real commits (9889f6c, d0eef98) but never run through `/opsx:archive`, leaving `openspec/specs/` stale and self-contradicting shipped code (`CLAUDE.md` said "light-bearers" while shipped copy already said "wavelets"). Both are now archived at `openspec/changes/archive/2026-08-28-*`, with their approved deltas synced into `openspec/specs/design-system/`, `marketing-pages/`, and `doctrine-content/`. The REQ-HOME-001 portion of `web-v0-3-explosion-of-light`'s delta was deliberately **not** synced — see item 1 above, it's still open.
+7. `CLAUDE.md`, `docs/PRD.md`, and `docs/ROADMAP.md` status banners updated to describe v0.3 as the current shipped state instead of the stale v0.1 reference, and `CLAUDE.md`'s content rule now says "wavelet" instead of "light-bearer."
+8. **`main` did not actually have v0.3 on it until this session.** PR #4 (`web-v0-3-explosion-of-light`) had sat open, unmerged, since 2026-08-16 — `main` was still serving the earlier `home-hero-refresh-and-wavelets-rename` hero (which, notably, *did* keep the identity statement above the fold, REQ-HOME-001-compliant). Everything in this session prior to this fix was read from the `web-v0-3-explosion-of-light` branch's working tree, not from what was actually live — a mistake worth remembering: **always check which branch is checked out and whether it's merged before describing anything as "current" or "live."** Founder confirmed 2026-08-28: v0.3 is the only version to continue building on. Resolution: PR #4 merged into `main` (clean fast-forward, Vercel preview had already passed CI) and pushed — v0.3 is now genuinely live. PR #3 (`web-v0-2-redesign`, superseded, never applied) closed as stale cleanup at the same time.
+
+---
+
 ## Accounts & Access (human-only)
 
 | # | What | Why it's human-only | Status |
@@ -62,7 +99,10 @@ This is the single source of truth for "can an agent just do this, or does it ne
 - [x] Build v0.1 (Phase 0 + Phase 1: scaffold, design system, all 6 core pages) — **done 2026-08-14**, unattended via the agentic-build pipeline, see [PR #2](https://github.com/Ecclesia-Lucis/ecclesialucis-website/pull/2) (merged, squash)
 - [x] Review PR #2, merge, confirm production deploy — **done 2026-08-14**, live at `ecclesialucis-website.vercel.app` (`readyState: READY`)
 - [x] Archive the `v0-1-website-build` OpenSpec change, sync specs to `openspec/specs/` — **done 2026-08-14**, see `openspec/changes/archive/2026-08-14-v0-1-website-build/`
-- [ ] **Founder review of v0.1** — visit the live preview, raise any revision notes as new `/opsx:propose` changes (expected per `docs/CONTENT_STRATEGY.md` Brand Direction — treat v0.1 as a strong first draft, not final)
+- [ ] **Decide REQ-HOME-001 conflict** — see "Open Issues Register" item 1 above (hero identity statement below the fold, shipped without required sign-off)
+- [ ] **Pick a direction for exploration-style navigation** — see "Open Issues Register" item 2 above
+- [ ] **Review/file the Threshold redesign proposal** — see "Open Issues Register" item 3 above
+- [x] ~~Founder review of v0.1~~ — superseded: two further revision passes already shipped past v0.1 (see `CLAUDE.md` "Current status"); ongoing review now happens per-change via each `/opsx:propose`
 - [ ] Confirm current EIN/501(c)(3) status (affects footer + any future donation copy) — still blocking REQ-LEGAL-001 and the Phase 3 launch gate
 - [ ] Set up Porkbun DNS once the site is ready to go live (`docs/INFRASTRUCTURE.md` §2)
 - [ ] Confirm brand assets (`assets/brand/*.png`) are placeholders vs. final
