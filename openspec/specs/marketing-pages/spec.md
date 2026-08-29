@@ -6,13 +6,6 @@ The 6 v1 pages themselves — the actual routes a visitor navigates, built on `s
 
 ## Requirements
 
-### Requirement: Homepage identity statement above the fold
-The homepage SHALL present, above the fold, a one-sentence identity statement and either a one-sentence "what this is not" disclaimer or an immediate link to it (REQ-HOME-001).
-
-#### Scenario: First-time visitor lands on Home
-- **WHEN** a visitor loads `/`
-- **THEN** a one-sentence identity statement and a "what this is not" disclaimer or link are both visible without scrolling on a standard desktop viewport
-
 ### Requirement: Six core routes exist
 The system SHALL provide the following routes, each rendering content per `docs/CONTENT_STRATEGY.md`'s sitemap: `/` (Home), a Purpose & Tenets route, `/practices`, `/covenant` (folding in governance/non-hierarchy content), `/about` (FAQ), and a Community & Contact route.
 
