@@ -35,12 +35,12 @@ The homepage SHALL open with a near-silent hero (per `design-system`'s "Threshol
 - **THEN** the chamber's heading, body text, and motes appear for the first time in the chamber — none of that content was already fully shown during the threshold's reveal
 
 ### Requirement: Interior pages inherit the visual system without the pinned-scroll treatment
-Interior routes (`/purpose`, `/tenets`, `/practices`, `/covenant`, `/about`, `/community`) SHALL use the Threshold palette, typography, and mote content pattern, but SHALL NOT implement the homepage's pinned hero-and-iris-reveal scroll sequence — a visitor arriving directly at an interior page SHALL see its content immediately, without a scroll gate.
+Interior routes (`/purpose`, `/tenets`, `/practices`, `/covenant`, `/about`, `/community`) SHALL use the Threshold palette and typography, but SHALL NOT implement the homepage's pinned hero-and-iris-reveal scroll sequence, and SHALL NOT be restructured to use the scattered-mote content pattern — a visitor arriving directly at an interior page SHALL see its content immediately, without a scroll gate, in its existing layout (e.g. the `Card` grids on `/tenets`, `/practices`, `/covenant`).
 
 #### Scenario: Interior page content visible without scrolling past a gate
 - **WHEN** a visitor navigates directly to any interior route (e.g., from a search result or shared link)
 - **THEN** that page's primary content is reachable without first scrolling through a pinned hero or threshold-reveal sequence
 
-#### Scenario: Interior pages still use the Threshold visual system
+#### Scenario: Interior pages use the Threshold palette and typography, unchanged structure
 - **WHEN** an interior page renders
-- **THEN** it uses the paper/void/accent palette, the display/body typography pairing, and the scattered-mote content pattern defined in `design-system`
+- **THEN** it uses the paper/void/accent palette and the display/body typography pairing defined in `design-system`, with the same layout structure (headers, prose, `Card` grids/lists) it had before this change

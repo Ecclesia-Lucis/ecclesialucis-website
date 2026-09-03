@@ -1,21 +1,23 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Manrope } from "next/font/google";
+import { Odibee_Sans, DM_Sans } from "next/font/google";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { site } from "@/content/site";
-import { lightTheme } from "@/lib/tokens";
+import { paperTheme } from "@/lib/tokens";
 import "./globals.css";
 
-// Humanist high-contrast serif for headings; geometric sans for body
-// (design-system spec). Exposed as CSS variables consumed by lib/tokens.ts.
-const display = Fraunces({
+// Blocky/technical display face for the wordmark, headings, and threshold
+// labels; humanist sans for body (design-system spec: "Threshold palette
+// and typography"). Exposed as CSS variables consumed by lib/tokens.ts.
+// Odibee Sans ships a single weight (400) — there is no heavier cut to load.
+const display = Odibee_Sans({
   subsets: ["latin"],
+  weight: "400",
   display: "swap",
   variable: "--font-display",
-  axes: ["opsz"],
 });
 
-const body = Manrope({
+const body = DM_Sans({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-body",
@@ -38,9 +40,9 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  // The site no longer auto-switches to dark on `prefers-color-scheme: dark`
-  // (tailwind.config.ts), so the browser chrome color stays the light base too.
-  themeColor: lightTheme.base,
+  // The site never switches to dark on `prefers-color-scheme: dark`
+  // (tailwind.config.ts) — the fixed paper theme is the only theme.
+  themeColor: paperTheme.base,
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

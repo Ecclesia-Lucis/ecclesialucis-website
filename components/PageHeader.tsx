@@ -7,10 +7,10 @@ type PageHeaderProps = {
   intro?: ReactNode;
 };
 
-/** Consistent hero for interior (non-home) pages, over the soft light glow. */
+/** Consistent hero for interior (non-home) pages. */
 export function PageHeader({ eyebrow, title, intro }: PageHeaderProps) {
   return (
-    <Section as="header" className="spectrum-bleed pb-4 pt-16 sm:pt-24" spacious={false}>
+    <Section as="header" className="pb-4 pt-16 sm:pt-24" spacious={false}>
       <Container className="motion-safe:animate-fade-up">
         <Eyebrow>{eyebrow}</Eyebrow>
         <h1 className="max-w-3xl text-4xl font-semibold tracking-tight sm:text-5xl">{title}</h1>

@@ -9,22 +9,30 @@ This is the single source of truth for "can an agent just do this, or does it ne
 
 ---
 
-## Open Issues Register (updated 2026-08-29)
+## Open Issues Register (updated 2026-09-02)
 
 **Read this section first.** It's the complete current list of things that need a founder decision or a task before more design/build work should land on top of them. When an item resolves, move it to the "Resolved" group with the date; when a new conflict or open question surfaces, add it here rather than letting it live only in a chat transcript.
 
-### 🔴 Open — needs a founder decision before dependent work proceeds
-
-1. **"Threshold" scroll-driven redesign — proposal filed, ready for review.**
-   - **What:** a scroll-driven homepage redesign (dust-dissolve "inverted blackhole" imagery, alternating light/void iris-reveal transitions, Odibee Sans display + DM Sans body typography, scattered "mote" doctrine content instead of cards, context-triggered navigation) was built and iterated as a standalone prototype. **Founder confirmed 2026-08-29: this is the primary design aesthetic for the site going forward**, superseding v0.3 "Explosion of Light." Filed as `openspec/changes/web-v0-4-threshold/` — proposal, specs deltas, design, and tasks are all written and validate cleanly.
-   - **Why it matters:** replaces large parts of the v0.3 baseline (bright spectrum-accent palette → paper/void inversion, typography pairing, card/chapter layout → mote scatter, persistent nav → context-triggered nav). `design.md` resolves the two decisions left open: `WayfindingThread` is retired (no role under the new visual language), and interior pages inherit only the palette/type/mote system, not the full pinned-scroll hero treatment (so a visitor landing directly on `/covenant` isn't scroll-gated).
-   - **Your call:** review `openspec/changes/web-v0-4-threshold/proposal.md`, `design.md`, and the `specs/` deltas, then run `/opsx:apply` (or ask an agent to) when ready to implement.
-   - **Status:** OPEN — planning complete, not yet applied.
-
 ### 🟡 Open — needs confirmation, but not blocking current work
 
-2. EIN/501(c)(3) status — see Accounts & Access item 6 below. Still blocks only REQ-LEGAL-001 and the Phase 3 launch gate, not Phase 2 polish or the Threshold work.
-3. Whether `assets/brand/*.png` are final logos — see Decisions item 3 below. Unrelated to the newer "inverted blackhole" image supplied specifically for the Threshold direction, which is a separate asset with its own (settled) status as a real production asset for that work.
+2. EIN/501(c)(3) status — see Accounts & Access item 6 below. Still blocks only REQ-LEGAL-001 and the Phase 3 launch gate, not Phase 2 polish.
+3. Whether `assets/brand/*.png` are final logos — see Decisions item 3 below. Unrelated to the "inverted blackhole" image, which is a separate asset with its own (settled) status as a real production asset for the Threshold homepage.
+4. **Adapted "materialize" card-reveal effect for interior doctrine-page Card grids — idea captured 2026-09-01, no change filed yet.**
+   - **What:** Explored a CodePen, ["Material Design: Profile Card" by Mestika](https://codepen.io/Mestika/pen/KVXVWE), as a possible new interaction for the `Card` grids on `/tenets`, `/practices`, and `/covenant` — a small circle "materializes" and unfolds into a rectangular card, revealing its content in stages. As published, the demo only supports a single, viewport-centered, page-load-triggered instance and does **not** work for multiple cards in a grid without a rewrite:
+     - `.profile-card` is `position: absolute; top/left: 50%; transform: translate(-50%,-50%)` — centered on the page, not placed in a grid cell. Needs `position: relative` and normal grid/flex flow instead.
+     - The expanding-circle "puff" background reveal is a `body::before` pseudo-element sized off the viewport — a page-boot effect, not a per-card one. Needs to move to a per-card pseudo-element, recalibrated to the card's own box.
+     - The four-stage reveal (`init` → `moveDown` → `moveUp` → `materia`) fires at hardcoded page-load timestamps (0.2s–3.5s), not on hover or scroll. With 8–11 cards in a grid this would fire everything in lockstep rather than one at a time. Needs a per-card scroll-triggered reveal instead — `lib/useInView.ts` (the IntersectionObserver hook built for `web-v0-4-threshold`'s homepage chambers/motes) is directly reusable here.
+     - The end state is a hardcoded pixel box (440×280px), not responsive to a grid track's width. Needs relative sizing.
+   - **Why it matters:** a visual-polish idea for interior pages, independent of the Threshold homepage work (`web-v0-4-threshold`) — interior pages keep their existing `Card` grid layout, per the founder's 2026-09-01 direction (see item 1 below: interior pages get the Threshold palette/typography only, not the mote-scatter pattern). This would be a follow-on enhancement to the `Card` component itself, not a redesign of it.
+   - **Your call:** pilot this on **one** interior page first before deciding whether to extend it further — Tenets is the natural candidate (11 cards, the largest and most uniform grid). When ready, run `/opsx:propose` describing the adapted effect (e.g. "adapt the Material Design profile-card reveal effect for the Tenets card grid, scroll-triggered per card, reusing lib/useInView.ts") as its own change — keep it decoupled from `web-v0-4-threshold` so each change gets its own review/apply pass.
+   - **Status:** OPEN — idea captured, no change filed yet.
+
+### 🟢 Resolved 2026-09-02
+
+1. **"Threshold" scroll-driven redesign — implemented, verified, and shipped to `main`.**
+   - **What:** the scroll-driven homepage redesign filed at `openspec/changes/web-v0-4-threshold/` (dust-dissolve "inverted blackhole" hero, alternating light/void iris-reveal thresholds, Odibee Sans + DM Sans typography, "mote"-scattered doctrine content, context-triggered navigation) is fully implemented (`tasks.md` sections 1–5) and verified end-to-end (`tasks.md` section 6): full sequence, `prefers-reduced-motion` flattening, keyboard-only and touch nav reachability, doctrine-before-CTA ordering, no doctrine-copy drift, clean build/lint.
+   - **One real defect found and fixed during verification:** the chamber eyebrow label's ember-gold-on-void contrast measured 4.10:1 — below WCAG 2.2 AA's 4.5:1 normal-text threshold; the original code comment's claim that it qualified for the 3:1 large-text exemption was wrong at the 14px/semibold size it was rendered at. Fixed by resizing the eyebrow to 19px/bold (`components/Chamber.tsx`), which genuinely clears the ≥18.66px-bold large-text threshold at the same measured ratio.
+   - **Status:** committed and pushed directly to `main` 2026-09-02. Production deploy follows Vercel's existing main-branch auto-deploy — confirm the live site once that build completes.
 
 ### 🟢 Resolved this session (2026-08-28 – 2026-08-29)
 
@@ -92,7 +100,8 @@ This is the single source of truth for "can an agent just do this, or does it ne
 - [x] Archive the `v0-1-website-build` OpenSpec change, sync specs to `openspec/specs/` — **done 2026-08-14**, see `openspec/changes/archive/2026-08-14-v0-1-website-build/`
 - [x] **Decide REQ-HOME-001 conflict** — **resolved 2026-08-29**: requirement retired, relocation approved (Open Issues Register item 7)
 - [x] **Pick a direction for exploration-style navigation** — **decided 2026-08-29**: reveal on scroll-end or pointer-near-top, hidden otherwise (Open Issues Register item 8)
-- [ ] **Review the Threshold redesign proposal once filed** — see "Open Issues Register" item 1 above; confirmed as primary direction 2026-08-29, `/opsx:propose` in progress
+- [x] **Review the Threshold redesign proposal once filed** — **resolved 2026-09-02**: implemented, verified, and pushed to `main` (see "Open Issues Register" Resolved 2026-09-02)
+- [ ] **Pilot the adapted Material Design card-reveal effect on one interior page** — see "Open Issues Register" item 4 above; idea captured 2026-09-01, not yet proposed
 - [x] ~~Founder review of v0.1~~ — superseded: two further revision passes already shipped past v0.1 (see `CLAUDE.md` "Current status"); ongoing review now happens per-change via each `/opsx:propose`
 - [ ] Confirm current EIN/501(c)(3) status (affects footer + any future donation copy) — still blocking REQ-LEGAL-001 and the Phase 3 launch gate
 - [ ] Set up Porkbun DNS once the site is ready to go live (`docs/INFRASTRUCTURE.md` §2)

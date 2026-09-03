@@ -1,8 +1,8 @@
 import type { Config } from "tailwindcss";
 import plugin from "tailwindcss/plugin";
 import {
-  darkTheme,
-  lightTheme,
+  paperTheme,
+  voidOverrides,
   cssVarName,
   fontStacks,
   fontSizes,
@@ -12,16 +12,17 @@ import {
   type ThemeColors,
 } from "./lib/tokens";
 
-/** Build the `{ "--color-x": "#hex" }` map for a theme from the token definitions. */
-function themeVars(theme: ThemeColors): Record<string, string> {
+/** Build the `{ "--color-x": "#hex" }` map for a (full or partial) theme from the token definitions. */
+function themeVars(theme: Partial<ThemeColors>): Record<string, string> {
   return (Object.keys(theme) as ColorRole[]).reduce<Record<string, string>>((acc, role) => {
-    acc[cssVarName(role)] = theme[role];
+    const value = theme[role];
+    if (value) acc[cssVarName(role)] = value;
     return acc;
   }, {});
 }
 
 /** Semantic color utilities (bg-base, text-ink, ...) that read the CSS variables. */
-const semanticColors = (Object.keys(darkTheme) as ColorRole[]).reduce<Record<string, string>>(
+const semanticColors = (Object.keys(paperTheme) as ColorRole[]).reduce<Record<string, string>>(
   (acc, role) => {
     acc[role.replace(/[A-Z]/g, (m) => `-${m.toLowerCase()}`)] = `var(${cssVarName(role)})`;
     return acc;
@@ -61,7 +62,6 @@ const config: Config = {
       fontSize: fontSizes as any,
       spacing: {
         section: spacing.section,
-        chapter: spacing.chapter,
         gutter: spacing.gutter,
       },
       maxWidth: {
@@ -77,39 +77,27 @@ const config: Config = {
           "0%, 100%": { transform: "translate3d(0, 0, 0)" },
           "50%": { transform: "translate3d(0, -2%, 0)" },
         },
-        // Slower, larger-amplitude drift for the v0.3 spectrum-bleed edge glow
-        // ("tens of seconds", per docs/design/v0-3-radical-light-vision.md §4.2)
-        // — distinct from the tighter hero light-source `drift` above.
-        "spectrum-drift": {
-          "0%, 100%": { transform: "translate3d(0, 0, 0) scale(1)" },
-          "50%": { transform: "translate3d(0, -3%, 0) scale(1.04)" },
-        },
-        // One-shot kinetic-type load-in for the "Ecclesia Lucis" hero wordmark
-        // (design-system spec: "One-shot kinetic-type hero load-in").
-        "kinetic-type": {
-          "0%": { fontWeight: "300", letterSpacing: "0.12em", opacity: "0" },
-          "55%": { opacity: "1" },
-          "100%": { fontWeight: "600", letterSpacing: "-0.01em", opacity: "1" },
-        },
       },
       animation: {
         "fade-up": "fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both",
         "drift": "drift 18s ease-in-out infinite",
-        "spectrum-drift": "spectrum-drift 42s ease-in-out infinite",
-        "kinetic-type": "kinetic-type 1.1s cubic-bezier(0.16, 1, 0.3, 1) both",
       },
     },
   },
   plugins: [
     plugin(({ addBase }) => {
       addBase({
-        // Light (true-white base) is the authored default — v0.3 theme-role swap.
-        ":root": themeVars(lightTheme),
-        // The founder wants the bright/white identity to be what every visitor
-        // sees, not something that flips to dark based on their OS setting —
-        // so the site no longer auto-switches on `prefers-color-scheme: dark`.
-        // `darkTheme` (lib/tokens.ts) is kept, unused for now, in case a
-        // future manual light/dark toggle is wanted.
+        // The single fixed Threshold theme — paper base, applied everywhere
+        // by default (site-scaffold spec: "Fixed single theme, no
+        // OS-driven switching").
+        ":root": themeVars(paperTheme),
+        // Void-state overrides, scoped to a homepage chamber that has
+        // flipped via ThresholdReveal (design-system spec: "Iris
+        // threshold-reveal mechanism"). Only the roles listed in
+        // `voidOverrides` differ; `accent`/`accentSoft`/`accentContrast`
+        // inherit the `:root` value on purpose — the accent hue is
+        // identical in both states.
+        "[data-tone='void']": themeVars(voidOverrides),
         // Disable decorative motion for visitors who ask for it (design-system spec).
         "@media (prefers-reduced-motion: reduce)": {
           "*, *::before, *::after": {
